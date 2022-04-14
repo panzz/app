@@ -14,7 +14,13 @@ import voiceInput from './voice-input/voice-input.js';
 // import * as universe from './universe.js';
 // import {toggle as inventoryToggle} from './inventory.js';
 import {isInIframe, getVelocityDampingFactor} from './util.js';
-import {getRenderer, /*renderer2,*/ scene, camera, dolly, getContainerElement} from './renderer.js';
+import {
+  getRenderer,
+  /* renderer2, */ scene,
+  camera,
+  dolly,
+  getContainerElement,
+} from './renderer.js';
 import physicsManager from './physics-manager.js';
 /* import {menuActions} from './mithril-ui/store/actions.js';
 import {menuState} from './mithril-ui/store/state.js'; */
@@ -38,8 +44,14 @@ const zeroVector = new THREE.Vector3();
 
 const ioManager = new EventTarget();
 
-ioManager.lastAxes = [[0, 0, 0, 0], [0, 0, 0, 0]];
-ioManager.lastButtons = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+ioManager.lastAxes = [
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+];
+ioManager.lastButtons = [
+  [0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0],
+];
 ioManager.currentWeaponValue = 0;
 ioManager.lastWeaponValue = 0;
 ioManager.currentTeleport = false;
@@ -69,7 +81,7 @@ const lastWASDDownTime = {
   keyW: 0,
   keyA: 0,
   keyS: 0,
-  keyD: 0
+  keyD: 0,
 };
 
 const resetKeys = () => {
@@ -82,7 +94,10 @@ cameraManager.addEventListener('pointerlockchange', () => {
   resetKeys();
 });
 
-const _inputFocused = () => document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.getAttribute('contenteditable') !== null);
+const _inputFocused = () =>
+  document.activeElement &&
+  (document.activeElement.tagName === 'INPUT' ||
+    document.activeElement.getAttribute('contenteditable') !== null);
 ioManager.inputFocused = _inputFocused;
 
 const _updateHorizontal = direction => {
@@ -115,7 +130,9 @@ const lastNonzeroDirectionVector = new THREE.Vector3(0, 0, -1);
 ioManager.lastNonzeroDirectionVector = lastNonzeroDirectionVector;
 const _updateIo = timeDiff => {
   const renderer = getRenderer();
-  const xrCamera = renderer.xr.getSession() ? renderer.xr.getCamera(camera) : camera;
+  const xrCamera = renderer.xr.getSession()
+    ? renderer.xr.getCamera(camera)
+    : camera;
   if (renderer.xr.getSession()) {
     ioManager.currentWalked = false;
     const inputSources = Array.from(renderer.xr.getSession().inputSources);
@@ -148,24 +165,44 @@ const _updateIo = timeDiff => {
             localEuler.setFromQuaternion(xrCamera.quaternion, 'YXZ');
             localEuler.x = 0;
             localEuler.z = 0;
-            localVector3.set(dx, 0, dy)
+            localVector3
+              .set(dx, 0, dy)
               .applyEuler(localEuler)
               .multiplyScalar(0.05);
 
             dolly.matrix
               // .premultiply(localMatrix2.makeTranslation(-xrCamera.position.x, -xrCamera.position.y, -xrCamera.position.z))
-              .premultiply(localMatrix3.makeTranslation(localVector3.x, localVector3.y, localVector3.z))
+              .premultiply(
+                localMatrix3.makeTranslation(
+                  localVector3.x,
+                  localVector3.y,
+                  localVector3.z,
+                ),
+              )
               // .premultiply(localMatrix2.copy(localMatrix2).invert())
               .decompose(dolly.position, dolly.quaternion, dolly.scale);
             ioManager.currentWalked = true;
           }
-          
+
           ioManager.currentWeaponGrabs[1] = buttons[1] > 0.5;
         } else if (handedness === 'right') {
           const _applyRotation = r => {
             dolly.matrix
-              .premultiply(localMatrix2.makeTranslation(-xrCamera.position.x, -xrCamera.position.y, -xrCamera.position.z))
-              .premultiply(localMatrix3.makeRotationFromQuaternion(localQuaternion2.setFromAxisAngle(localVector3.set(0, 1, 0), r)))
+              .premultiply(
+                localMatrix2.makeTranslation(
+                  -xrCamera.position.x,
+                  -xrCamera.position.y,
+                  -xrCamera.position.z,
+                ),
+              )
+              .premultiply(
+                localMatrix3.makeRotationFromQuaternion(
+                  localQuaternion2.setFromAxisAngle(
+                    localVector3.set(0, 1, 0),
+                    r,
+                  ),
+                ),
+              )
               .premultiply(localMatrix2.copy(localMatrix2).invert())
               .decompose(dolly.position, dolly.quaternion, dolly.scale);
           };
@@ -180,16 +217,22 @@ const _updateIo = timeDiff => {
           ) {
             _applyRotation(-Math.PI * 0.2);
           }
-          ioManager.currentTeleport = (axes[1] < -0.75 || axes[3] < -0.75);
-          ioManager.currentMenuDown = (axes[1] > 0.75 || axes[3] > 0.75);
+          ioManager.currentTeleport = axes[1] < -0.75 || axes[3] < -0.75;
+          ioManager.currentMenuDown = axes[1] > 0.75 || axes[3] > 0.75;
 
           ioManager.currentWeaponDown = buttonsSrc[0].pressed;
           ioManager.currentWeaponValue = buttons[0];
           ioManager.currentWeaponGrabs[0] = buttonsSrc[1].pressed;
 
           if (
-            buttons[3] >= 0.5 && ioManager.lastButtons[index][3] < 0.5 &&
-            !(Math.abs(axes[0]) > 0.5 || Math.abs(axes[1]) > 0.5 || Math.abs(axes[2]) > 0.5 || Math.abs(axes[3]) > 0.5) &&
+            buttons[3] >= 0.5 &&
+            ioManager.lastButtons[index][3] < 0.5 &&
+            !(
+              Math.abs(axes[0]) > 0.5 ||
+              Math.abs(axes[1]) > 0.5 ||
+              Math.abs(axes[2]) > 0.5 ||
+              Math.abs(axes[3]) > 0.5
+            ) &&
             !game.isJumping() &&
             !game.isSitting()
           ) {
@@ -201,7 +244,7 @@ const _updateIo = timeDiff => {
         ioManager.lastAxes[index][1] = axes[1];
         ioManager.lastAxes[index][2] = axes[2];
         ioManager.lastAxes[index][3] = axes[3];
-        
+
         ioManager.lastButtons[index][0] = buttons[0];
         ioManager.lastButtons[index][1] = buttons[1];
         ioManager.lastButtons[index][2] = buttons[2];
@@ -211,9 +254,9 @@ const _updateIo = timeDiff => {
     }
   } else {
     keysDirection.set(0, 0, 0);
-    
+
     const localPlayer = metaversefile.useLocalPlayer();
-    
+
     _updateHorizontal(keysDirection);
     if (keysDirection.equals(zeroVector)) {
       if (localPlayer.hasAction('narutoRun')) {
@@ -222,7 +265,7 @@ const _updateIo = timeDiff => {
     } else {
       lastNonzeroDirectionVector.copy(keysDirection);
     }
-    
+
     if (localPlayer.hasAction('fly')) {
       keysDirection.applyQuaternion(camera.quaternion);
       _updateVertical(keysDirection);
@@ -231,7 +274,7 @@ const _updateIo = timeDiff => {
       cameraEuler.x = 0;
       cameraEuler.z = 0;
       keysDirection.applyEuler(cameraEuler);
-      
+
       if (ioManager.keys.ctrl && !ioManager.lastCtrlKey) {
         game.toggleCrouch();
         // physicsManager.setCrouchState(!physicsManager.getCrouchState());
@@ -240,8 +283,7 @@ const _updateIo = timeDiff => {
     }
     if (keysDirection.length() > 0 && physicsManager.getPhysicsEnabled()) {
       localPlayer.characterPhysics.applyWasd(
-        keysDirection.normalize()
-          .multiplyScalar(game.getSpeed() * timeDiff)
+        keysDirection.normalize().multiplyScalar(game.getSpeed() * timeDiff),
       );
     }
   }
@@ -295,7 +337,8 @@ ioManager.keydown = e => {
   } */
 
   switch (e.which) {
-    case 9: { // tab
+    case 9: {
+      // tab
       break;
     }
     case 49: // 1
@@ -305,12 +348,12 @@ ioManager.keydown = e => {
     case 53: // 5
     case 54: // 6
     case 55: // 7
-    case 56: // 8
-    {
+    case 56: { // 8
       game.selectLoadout(e.which - 49);
       break;
     }
-    case 87: { // W
+    case 87: {
+      // W
       ioManager.keys.up = true;
       if (!cameraManager.pointerLockElement) {
         game.menuVertical(-1);
@@ -326,7 +369,8 @@ ioManager.keydown = e => {
       lastWASDDownTime.keyS = 0;
       break;
     }
-    case 65: { // A
+    case 65: {
+      // A
       ioManager.keys.left = true;
       if (!cameraManager.pointerLockElement) {
         game.menuHorizontal(-1);
@@ -342,7 +386,8 @@ ioManager.keydown = e => {
       lastWASDDownTime.keyD = 0;
       break;
     }
-    case 83: { // S
+    case 83: {
+      // S
       if (e.ctrlKey) {
         e.preventDefault();
         e.stopPropagation();
@@ -355,7 +400,7 @@ ioManager.keydown = e => {
             game.menuVertical(1);
           } else {
             // if (!game.dragging) {
-              // _setTransformMode('scale');
+            // _setTransformMode('scale');
             // }
           }
         }
@@ -371,7 +416,8 @@ ioManager.keydown = e => {
       }
       break;
     }
-    case 68: { // D
+    case 68: {
+      // D
       ioManager.keys.right = true;
       if (!cameraManager.pointerLockElement) {
         game.menuHorizontal(1);
@@ -387,7 +433,8 @@ ioManager.keydown = e => {
       lastWASDDownTime.keyA = 0;
       break;
     }
-    case 82: { // R
+    case 82: {
+      // R
       if (cameraManager.pointerLockElement) {
         if (game.canRotate()) {
           game.menuRotate(1);
@@ -396,12 +443,13 @@ ioManager.keydown = e => {
         }
       } else {
         // if (!game.dragging) {
-          // _setTransformMode('rotate');
+        // _setTransformMode('rotate');
         // }
       }
       break;
     }
-    case 70: { // F
+    case 70: {
+      // F
       e.preventDefault();
       e.stopPropagation();
       if (game.canPush()) {
@@ -414,14 +462,15 @@ ioManager.keydown = e => {
       }
       break;
     }
-    case 71: { // G
+    case 71: {
+      // G
       if (cameraManager.pointerLockElement) {
         /* if (game.canTry()) {
           game.menuTry();
         } */
       } else {
         // if (!game.dragging) {
-          // _setTransformMode('translate');
+        // _setTransformMode('translate');
         // }
       }
       break;
@@ -436,29 +485,31 @@ ioManager.keydown = e => {
       }
       break;
     } */
-    case 88: { // X
+    case 88: {
+      // X
       if (!e.ctrlKey) {
         /* if (game.canStartBuild()) {
           game.startBuild('floor');
         } else if (game.canBuild()) {
           game.setBuildMode('floor');
         } else { */
-          game.menuDelete();
+        game.menuDelete();
         // }
       }
       break;
     }
-    case 67: { // C
+    case 67: {
+      // C
       // if (!e.ctrlKey) {
-        /* if (game.canStartBuild()) {
+      /* if (game.canStartBuild()) {
           game.startBuild('stair');
         } else if (game.canBuild()) {
           game.setBuildMode('stair');
-        } else */if (game.canPush()) {
-          ioManager.keys.backward = true;
-        } else {
-          ioManager.keys.ctrl = true;
-        }
+        } else */ if (game.canPush()) {
+        ioManager.keys.backward = true;
+      } else {
+        ioManager.keys.ctrl = true;
+      }
       // }
       break;
     }
@@ -472,53 +523,61 @@ ioManager.keydown = e => {
       document.getElementById('key-r').click(); // equip
       break;
     } */
-    case 71: { // G
+    case 71: {
+      // G
       game.menuDrop();
       break;
     }
-    case 86: { // V
+    case 86: {
+      // V
       // if (!_inputFocused()) {
-        e.preventDefault();
-        e.stopPropagation();
-        game.menuVDown(e);
+      e.preventDefault();
+      e.stopPropagation();
+      game.menuVDown(e);
       // }
       break;
     }
-    case 66: { // B
+    case 66: {
+      // B
       // if (!_inputFocused()) {
-        e.preventDefault();
-        e.stopPropagation();
-        game.menuBDown(e);
+      e.preventDefault();
+      e.stopPropagation();
+      game.menuBDown(e);
       // }
       break;
     }
-    case 84: { // T
+    case 84: {
+      // T
       e.preventDefault();
       e.stopPropagation();
       voiceInput.toggleMic();
       break;
     }
-    case 89: { // Y
+    case 89: {
+      // Y
       e.preventDefault();
       e.stopPropagation();
       voiceInput.toggleSpeech();
       break;
     }
-    case 80: { // P
+    case 80: {
+      // P
       // game.destroyWorld()
       // game.menuPhysics();
       break;
     }
-    case 16: { // shift
+    case 16: {
+      // shift
       ioManager.keys.shift = true;
       break;
     }
-    case 32: { // space
+    case 32: {
+      // space
       ioManager.keys.space = true;
       // if (controlsManager.isPossessed()) {
-        if (!game.isJumping()) {
-          game.jump();
-        } /* else {
+      if (!game.isJumping()) {
+        game.jump();
+      } /* else {
           physicsManager.setGlide(!physicsManager.getGlideState() && !game.isFlying());
         } */
       // }
@@ -528,24 +587,27 @@ ioManager.keydown = e => {
       ioManager.keys.ctrl = true;
       break;
     } */
-    case 81: { // Q
+    case 81: {
+      // Q
       // game.setWeaponWheel(true);
       if (game.canToggleAxis()) {
         game.toggleAxis();
       }
       break;
     }
-    case 69: { // E
+    case 69: {
+      // E
       // if (cameraManager.pointerLockElement) {
-        if (game.canRotate()) {
-          game.menuRotate(-1);
-        } else {
-          game.menuActivateDown();
-        }
+      if (game.canRotate()) {
+        game.menuRotate(-1);
+      } else {
+        game.menuActivateDown();
+      }
       // }
       break;
     }
-    case 192: { // tilde
+    case 192: {
+      // tilde
       game.toggleEditMode();
       break;
     }
@@ -557,15 +619,18 @@ ioManager.keydown = e => {
       game.toggleMap();
       break;
     } */
-    case 74: { // J
+    case 74: {
+      // J
       game.inventoryHack = !game.inventoryHack;
       break;
     }
-    case 27: { // esc
+    case 27: {
+      // esc
       game.setContextMenu(false);
       break;
     }
-    case 72: { // H
+    case 72: {
+      // H
       const debug = metaversefile.useDebug();
       debug.toggle();
       break;
@@ -577,13 +642,16 @@ ioManager.keypress = e => {
 };
 ioManager.wheel = e => {
   // window.addEventListener('wheel', e => {
-    // console.log('target', e.target);
-    if (physicsManager.getPhysicsEnabled()) {
-      const renderer = getRenderer();
-      if (renderer && (e.target === renderer.domElement || e.target.id === 'app')) {
-        cameraManager.handleWheelEvent(e);
-      }
+  // console.log('target', e.target);
+  if (physicsManager.getPhysicsEnabled()) {
+    const renderer = getRenderer();
+    if (
+      renderer &&
+      (e.target === renderer.domElement || e.target.id === 'app')
+    ) {
+      cameraManager.handleWheelEvent(e);
     }
+  }
   /* }, {
     passive: false,
   }); */
@@ -597,23 +665,28 @@ ioManager.keyup = e => {
       game.setWeaponWheel(false);
       break;
     } */
-    case 87: { // W
+    case 87: {
+      // W
       ioManager.keys.up = false;
       break;
     }
-    case 65: { // A
+    case 65: {
+      // A
       ioManager.keys.left = false;
       break;
     }
-    case 83: { // S
+    case 83: {
+      // S
       ioManager.keys.down = false;
       break;
     }
-    case 68: { // D
+    case 68: {
+      // D
       ioManager.keys.right = false;
       break;
     }
-    case 32: { // space
+    case 32: {
+      // space
       ioManager.keys.space = false;
       break;
     }
@@ -621,49 +694,56 @@ ioManager.keyup = e => {
       ioManager.keys.ctrl = false;
       break;
     } */
-    case 69: { // E
+    case 69: {
+      // E
       if (cameraManager.pointerLockElement) {
         game.menuActivateUp();
       }
       break;
     }
-    case 70: { // F
+    case 70: {
+      // F
       // if (cameraManager.pointerLockElement) {
-        ioManager.keys.forward = false;
+      ioManager.keys.forward = false;
       // }
       break;
     }
-    case 67: { // C
+    case 67: {
+      // C
       // if (cameraManager.pointerLockElement) {
-        ioManager.keys.backward = false;
-        ioManager.keys.ctrl = false;
+      ioManager.keys.backward = false;
+      ioManager.keys.ctrl = false;
       // }
       break;
     }
-    case 86: { // V
+    case 86: {
+      // V
       // if (!_inputFocused()) {
-        e.preventDefault();
-        e.stopPropagation();
-        game.menuVUp();
+      e.preventDefault();
+      e.stopPropagation();
+      game.menuVUp();
       // }
       break;
     }
-    case 66: { // B
+    case 66: {
+      // B
       // if (!_inputFocused()) {
-        e.preventDefault();
-        e.stopPropagation();
-        game.menuBUp();
+      e.preventDefault();
+      e.stopPropagation();
+      game.menuBUp();
       // }
       break;
     }
-    case 16: { // shift
+    case 16: {
+      // shift
       ioManager.keys.shift = false;
       ioManager.keys.doubleTap = false;
-      
+
       game.menuUnDoubleTap();
       break;
     }
-    case 46: { // delete
+    case 46: {
+      // delete
       const object = game.getMouseSelectedObject();
       if (object) {
         game.setMouseHoverObject(null);
@@ -674,7 +754,7 @@ ioManager.keyup = e => {
     }
     case 27: {
       // if (game.getMouseSelectedObject()) {
-        game.setMouseSelectedObject(null);
+      game.setMouseSelectedObject(null);
       // }
     }
   }
@@ -685,16 +765,27 @@ const _updateMouseMovement = e => {
 
   // const mouseDistance = Math.sqrt(movementX*movementX, movementY*movementY);
   // if ((mouseDistance - lastMouseDistance) < 100) { // hack around a Chrome bug
-    camera.position.add(localVector.copy(cameraManager.getCameraOffset()).applyQuaternion(camera.quaternion));
-  
-    camera.rotation.y -= movementX * Math.PI * 2 * 0.0005;
-    camera.rotation.x -= movementY * Math.PI * 2 * 0.0005;
-    camera.rotation.x = Math.min(Math.max(camera.rotation.x, -Math.PI * 0.35), Math.PI / 2);
-    camera.quaternion.setFromEuler(camera.rotation);
+  camera.position.add(
+    localVector
+      .copy(cameraManager.getCameraOffset())
+      .applyQuaternion(camera.quaternion),
+  );
 
-    camera.position.sub(localVector.copy(cameraManager.getCameraOffset()).applyQuaternion(camera.quaternion));
+  camera.rotation.y -= movementX * Math.PI * 2 * 0.0005;
+  camera.rotation.x -= movementY * Math.PI * 2 * 0.0005;
+  camera.rotation.x = Math.min(
+    Math.max(camera.rotation.x, -Math.PI * 0.35),
+    Math.PI / 2,
+  );
+  camera.quaternion.setFromEuler(camera.rotation);
 
-    camera.updateMatrixWorld();
+  camera.position.sub(
+    localVector
+      .copy(cameraManager.getCameraOffset())
+      .applyQuaternion(camera.quaternion),
+  );
+
+  camera.updateMatrixWorld();
   // }
   // lastMouseDistance = mouseDistance;
 };
@@ -705,11 +796,13 @@ const _getMouseRaycaster = (e, raycaster) => {
     renderer.getSize(localVector2D2);
     localVector2D.set(
       (clientX / localVector2D2.x) * 2 - 1,
-      -(clientY / localVector2D2.y) * 2 + 1
+      -(clientY / localVector2D2.y) * 2 + 1,
     );
     if (
-      localVector2D.x >= -1 && localVector2D.x <= 1 &&
-      localVector2D.y >= -1 && localVector2D.y <= 1
+      localVector2D.x >= -1 &&
+      localVector2D.x <= 1 &&
+      localVector2D.y >= -1 &&
+      localVector2D.y <= 1
     ) {
       raycaster.setFromCamera(localVector2D, camera);
       return raycaster;
@@ -722,28 +815,32 @@ const _getMouseRaycaster = (e, raycaster) => {
 };
 const _updateMouseHover = e => {
   let mouseHoverObject = null;
-  let mouseSelectedObject = null;
+  const mouseSelectedObject = null;
   let mouseHoverPhysicsId = 0;
   let htmlHover = false;
-  
+
   const raycaster = _getMouseRaycaster(e, localRaycaster);
   let point = null;
   if (raycaster) {
     transformControls.handleMouseMove(raycaster);
-    
+
     const position = raycaster.ray.origin;
     const quaternion = localQuaternion.setFromUnitVectors(
       localVector.set(0, 0, -1),
-      raycaster.ray.direction
+      raycaster.ray.direction,
     );
-    
-    const result = physx.physxWorker.raycastPhysics(physx.physics, position, quaternion);
-    
+
+    const result = physx.physxWorker.raycastPhysics(
+      physx.physics,
+      position,
+      quaternion,
+    );
+
     if (result) {
       const object = world.appManager.getAppByPhysicsId(result.objectId);
       if (object) {
         point = localVector.fromArray(result.point);
-        
+
         if (object.isHtml) {
           htmlHover = true;
         } else {
@@ -767,17 +864,17 @@ ioManager.mousemove = e => {
   /* if (game.weaponWheel) {
     game.updateWeaponWheel(e);
   } else { */
-    if (cameraManager.pointerLockElement) {
-      _updateMouseMovement(e);
+  if (cameraManager.pointerLockElement) {
+    _updateMouseMovement(e);
+  } else {
+    if (game.dragging) {
+      game.menuDrag(e);
+      game.menuDragRight(e);
     } else {
-      if (game.dragging) {
-        game.menuDrag(e);
-        game.menuDragRight(e);
-      } else {
-        _updateMouseHover(e);
-      }
+      _updateMouseHover(e);
     }
-    game.setLastMouseEvent(e);
+  }
+  game.setLastMouseEvent(e);
   // }
 };
 ioManager.mouseleave = e => {
@@ -789,11 +886,11 @@ ioManager.click = e => {
     game.menuClick();
   } else {
     // game.setContextMenu(false);
-    
+
     if (!game.hoverEnabled) {
       cameraManager.requestPointerLock();
     }
-    
+
     /* if (controlsManager.isPossessed()) {
       cameraManager.requestPointerLock();
     } else {
@@ -816,25 +913,30 @@ let lastMouseButtons = 0;
 ioManager.mousedown = e => {
   const changedButtons = lastMouseButtons ^ e.buttons;
   if (cameraManager.pointerLockElement) {
-    if ((changedButtons & 1) && (e.buttons & 1)) { // left
+    if (changedButtons & 1 && e.buttons & 1) {
+      // left
       game.menuMouseDown();
     }
-    if ((changedButtons & 2) && (e.buttons & 2)) { // right
+    if (changedButtons & 2 && e.buttons & 2) {
+      // right
       game.menuAim();
     }
   } else {
-    if ((changedButtons & 1) && (e.buttons & 1)) { // left
+    if (changedButtons & 1 && e.buttons & 1) {
+      // left
       const raycaster = _getMouseRaycaster(e, localRaycaster);
       if (raycaster) {
         transformControls.handleMouseDown(raycaster);
       }
     }
-    if ((changedButtons & 1) && (e.buttons & 2)) { // right
+    if (changedButtons & 1 && e.buttons & 2) {
+      // right
       game.menuDragdownRight();
       game.setContextMenu(false);
     }
   }
-  if ((changedButtons & 4) && (e.buttons & 4)) { // middle
+  if (changedButtons & 4 && e.buttons & 4) {
+    // middle
     e.preventDefault();
     game.menuDragdown();
   }
@@ -845,22 +947,26 @@ ioManager.mousedown = e => {
 ioManager.mouseup = e => {
   const changedButtons = lastMouseButtons ^ e.buttons;
   // if (mouseDown) {
-    if (cameraManager.pointerLockElement) {
-      if ((changedButtons & 1) && !(e.buttons & 1)) { // left
-        game.menuMouseUp();
-      }
-      if ((changedButtons & 2) && !(e.buttons & 2)) { // right
-        game.menuUnaim();
-      }
-    } else {
-      if ((changedButtons & 2) && !(e.buttons & 2)) { // right
-        game.menuDragupRight();
-      }
+  if (cameraManager.pointerLockElement) {
+    if (changedButtons & 1 && !(e.buttons & 1)) {
+      // left
+      game.menuMouseUp();
     }
-    if ((changedButtons & 4) && !(e.buttons & 4)) { // middle
-      game.menuDragup();
+    if (changedButtons & 2 && !(e.buttons & 2)) {
+      // right
+      game.menuUnaim();
     }
-    // mouseDown = false;
+  } else {
+    if (changedButtons & 2 && !(e.buttons & 2)) {
+      // right
+      game.menuDragupRight();
+    }
+  }
+  if (changedButtons & 4 && !(e.buttons & 4)) {
+    // middle
+    game.menuDragup();
+  }
+  // mouseDown = false;
   // }
   lastMouseButtons = e.buttons;
   game.setLastMouseEvent(e);

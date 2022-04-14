@@ -14,6 +14,7 @@ class VoiceInput extends EventTarget {
   micEnabled() {
     return !!this.mediaStream;
   }
+
   async enableMic() {
     await WSRTC.waitForReady();
     this.mediaStream = await WSRTC.getUserMedia();
@@ -26,14 +27,18 @@ class VoiceInput extends EventTarget {
       wsrtc.enableMic(this.mediaStream);
     }
 
-    this.dispatchEvent(new MessageEvent('micchange', {
-      data: {
-        enabled: true,
-      }
-    }));
+    this.dispatchEvent(
+      new MessageEvent('micchange', {
+        data: {
+          enabled: true,
+        },
+      }),
+    );
   }
+
   disableMic() {
-    /* if (this.micEnabled()) */ {
+    /* if (this.micEnabled()) */
+    {
       const wsrtc = world.getConnection();
       if (wsrtc) {
         wsrtc.disableMic();
@@ -41,20 +46,23 @@ class VoiceInput extends EventTarget {
         WSRTC.destroyUserMedia(this.mediaStream);
       }
       this.mediaStream = null;
-      
+
       const localPlayer = metaversefile.useLocalPlayer();
       localPlayer.setMicMediaStream(null);
 
-      this.dispatchEvent(new MessageEvent('micchange', {
-        data: {
-          enabled: false,
-        }
-      }));
+      this.dispatchEvent(
+        new MessageEvent('micchange', {
+          data: {
+            enabled: false,
+          },
+        }),
+      );
     }
     if (this.speechEnabled()) {
       this.disableSpeech();
     }
   }
+
   async toggleMic() {
     if (this.micEnabled()) {
       this.disableMic();
@@ -66,6 +74,7 @@ class VoiceInput extends EventTarget {
   speechEnabled() {
     return !!this.speechRecognition;
   }
+
   async enableSpeech() {
     if (!this.micEnabled()) {
       await this.enableMic();
@@ -117,22 +126,28 @@ class VoiceInput extends EventTarget {
 
     this.speechRecognition = localSpeechRecognition;
 
-    this.dispatchEvent(new MessageEvent('speechchange', {
-      data: {
-        enabled: true,
-      }
-    }));
+    this.dispatchEvent(
+      new MessageEvent('speechchange', {
+        data: {
+          enabled: true,
+        },
+      }),
+    );
   }
+
   disableSpeech() {
     this.speechRecognition.stop();
     this.speechRecognition = null;
 
-    this.dispatchEvent(new MessageEvent('speechchange', {
-      data: {
-        enabled: false,
-      }
-    }));
+    this.dispatchEvent(
+      new MessageEvent('speechchange', {
+        data: {
+          enabled: false,
+        },
+      }),
+    );
   }
+
   async toggleSpeech() {
     if (this.speechEnabled()) {
       this.disableSpeech();

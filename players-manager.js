@@ -52,27 +52,31 @@ class PlayersManager {
           const playerId = playerMap.get('playerId');
           
           if (playerId !== localPlayer.playerId) {
-            // console.log('add player', playerId, this.playersArray.toJSON());
+            console.log('add playerId %o, localPlayer:%o', playerId, localPlayer.playerId);
             
+            console.log('add playersArray:%o', this.playersArray);
             const remotePlayer = new RemotePlayer({
               playerId,
               playersArray: this.playersArray,
             });
             this.remotePlayers.set(playerId, remotePlayer);
+            console.log('after add remotePlayers:%o', this.remotePlayers);
           }
         }
         // console.log('players observe', added, deleted);
         for (const item of deleted.values()) {
-          // console.log('player remove 1', item);
+          console.log('player remove 1', item);
           const playerId = item.content.type._map.get('playerId').content.arr[0]; // needed to get the old data
-          // console.log('player remove 2', playerId, localPlayer.playerId);
+          console.log('player remove 2', playerId, localPlayer.playerId);
 
           if (playerId !== localPlayer.playerId) {
-            // console.log('remove player', playerId);
+            console.log('remove playerId %o, localPlayer:%O', playerId, localPlayer.playerId);
             
             const remotePlayer = this.remotePlayers.get(playerId);
+            console.log('remove remotePlayer:%o', remotePlayer);
             this.remotePlayers.delete(playerId);
             remotePlayer.destroy();
+            console.log('after remove remotePlayers:%o', this.remotePlayers);
           }
         }
       };
@@ -81,8 +85,15 @@ class PlayersManager {
     }
   }
   update(timestamp, timeDiff) {
+    // console.debug('update> remotePlayers(%o):%o', this.remotePlayers.size, this.remotePlayers.values())
+    // if (!this.remotePlayers.size || this.remotePlayers.values() <=  0) {
+    //   return
+    // }
     for (const remotePlayer of this.remotePlayers.values()) {
-      remotePlayer.updateAvatar(timestamp, timeDiff);
+      console.debug('update> remotePlayer(%o:%o)', this.remotePlayers.values(), Object.prototype.toString.call(remotePlayer.updateAvatar)=== '[object Function]')
+      if (remotePlayer && Object.prototype.toString.call(remotePlayer.updateAvatar)=== '[object Function]') {
+        remotePlayer.updateAvatar(timestamp, timeDiff);
+      }
     }
   }
 }

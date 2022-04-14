@@ -1,7 +1,9 @@
+// import fs from 'fs'
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import metaversefilePlugin from 'metaversefile/plugins/rollup.js'
 
+// console.debug('localhost.key:%o', fs.readFileSync('./certs/localhost.key'));
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -24,5 +26,20 @@ export default defineConfig({
     fs: {
       strict: true,
     },
+    // https: {
+    //   key: fs.readFileSync('./certs/localhost.key'),
+    //   cert: fs.readFileSync('./certs/localhost.crt'),
+    // },
+    // proxy: {
+    //   '/meta/': {
+    //       target: 'https://172.1.1.0:5500/_webaverse',
+    //       changeOrigin: true,
+    //       secure: false,
+    //       rewrite: (path) => path.replace(/^\/meta\//, ''),
+    //   },
+    // },
+    // hmr: {
+    //   server: 'https://localhost',
+    // },
   },
 })

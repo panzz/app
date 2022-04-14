@@ -1,21 +1,21 @@
-import {makeId, makePromise} from './util.js';
+import { makeId, makePromise } from './util.js';
 import metaversefileApi from 'metaversefile';
 
-const _getEmotion = text => {
+const _getEmotion = (text) => {
   let match;
-  if (match = text.match(/(😃|😊|😁|😄|😆|(?:^|\s)lol(?:$|\s))/)) {
+  if ((match = text.match(/(😃|😊|😁|😄|😆|(?:^|\s)lol(?:$|\s))/))) {
     match.emotion = 'joy';
     return match;
-  } else if (match = text.match(/(😉|😜|😂|😍|😎|😏|😇|❤️|💗|💕|💞|💖|👽)/)) {
+  } else if ((match = text.match(/(😉|😜|😂|😍|😎|😏|😇|❤️|💗|💕|💞|💖|👽)/))) {
     match.emotion = 'fun';
     return match;
-  } else if (match = text.match(/(😞|😖|😒|😱|😨|😰|😫)/)) {
+  } else if ((match = text.match(/(😞|😖|😒|😱|😨|😰|😫)/))) {
     match.emotion = 'sorrow';
     return match;
-  } else if (match = text.match(/(😠|😡|👿|💥|💢)/)) {
+  } else if ((match = text.match(/(😠|😡|👿|💥|💢)/))) {
     match.emotion = 'angry';
     return match;
-  } else if (match = text.match(/(😐|😲|😶)/)) {
+  } else if ((match = text.match(/(😐|😲|😶)/))) {
     match.emotion = 'neutral';
     return match;
   } else {
@@ -30,7 +30,9 @@ class ChatManager extends EventTarget {
     this.voiceRunning = false;
     this.voiceQueue = [];
   }
-  addPlayerMessage(player, message = '', {timeout = 3000} = {}) {
+
+  addPlayerMessage(player, message = '', { timeout = 3000 } = {}) {
+    console.debug('addPlayerMessage> player(%o):  %o', player, message);
     const chatId = makeId(5);
     const match = _getEmotion(message);
     const emotion = match ? match.emotion : null;
@@ -41,8 +43,9 @@ class ChatManager extends EventTarget {
       playerName: player.name,
       message,
     };
+    console.debug('addPlayerMessage> playerName(%o):%o  %o', chatId, m.playerName, m.message);
     player.addAction(m);
-    
+
     const _addEmotion = () => {
       if (emotion) {
         player.addAction({
@@ -55,59 +58,72 @@ class ChatManager extends EventTarget {
     _addEmotion();
     const _removeEmotion = () => {
       if (emotion) {
-        const emoteActionIndex = player.findActionIndex(action => action.type === 'emote' && action.value === value);
+        const emoteActionIndex = player.findActionIndex(
+          (action) => action.type === 'emote' && action.value === value
+        );
         if (emoteActionIndex !== -1) {
           player.removeActionIndex(emoteActionIndex);
         }
       }
     };
-    
-    this.dispatchEvent(new MessageEvent('messageadd', {
-      data: {
-        player,
-        message: m,
-      },
-    }));
-    
+
+    this.dispatchEvent(
+      // new MessageEvent('message', {
+      new MessageEvent('messageadd', {
+        data: {
+          player,
+          message: m,
+        },
+      })
+    );
+
     const localTimeout = setTimeout(() => {
       this.removePlayerMessage(player, m);
-      
+
       _removeEmotion();
     }, timeout);
     m.cleanup = () => {
       clearTimeout(localTimeout);
     };
-    
+
     return m;
   }
+
   addMessage(message, opts) {
     const localPlayer = metaversefileApi.useLocalPlayer();
     return this.addPlayerMessage(localPlayer, message, opts);
   }
+
   removePlayerMessage(player, m) {
     m.cleanup();
-    
-    const actionIndex = player.findActionIndex(action => action.chatId === m.chatId);
+
+    const actionIndex = player.findActionIndex(
+      (action) => action.chatId === m.chatId
+    );
     if (actionIndex !== -1) {
       player.removeActionIndex(actionIndex);
     } else {
       console.warn('remove unknown message action 2', m);
     }
-    
-    this.dispatchEvent(new MessageEvent('messageremove', {
-      data: {
-        player,
-        message: m,
-      },
-    }));
+
+    this.dispatchEvent(
+      new MessageEvent('messageremove', {
+        data: {
+          player,
+          message: m,
+        },
+      })
+    );
   }
+
   removeMessage(m) {
     const localPlayer = metaversefileApi.useLocalPlayer();
     this.removePlayerMessage(localPlayer, m);
   }
+
   async waitForVoiceTurn(fn) {
     // console.log('wait for voice queue', this.voiceRunning, this.voiceQueue.length);
-    
+
     if (!this.voiceRunning) {
       this.voiceRunning = true;
       // console.log('wait 0');
@@ -140,6 +156,4 @@ class ChatManager extends EventTarget {
 }
 const chatManager = new ChatManager();
 
-export {
-  chatManager,
-};
+export { chatManager };

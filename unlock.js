@@ -37,6 +37,7 @@ const m = "Proof of address.";
     
       const _getMainnetTokens = async address => {
         const res = await fetch(`https://mainnet-tokens.webaverse.com/${address}`);
+        console.debug('_getMainnetTokens> res(%o):%o', address, res);
         const j = await res.json();
         return j;
       };

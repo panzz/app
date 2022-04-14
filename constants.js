@@ -36,10 +36,11 @@ const origin = window.location.protocol + '//' + window.location.hostname;
 
 export const storageHost = 'https://ipfs.webaverse.com';
 export const previewHost = 'https://preview.exokit.org';
-export const inappPreviewHost = origin === 'https://local.webaverse.com' ?
-  'https://local.webaverse.online'
+export const inappPreviewHost = origin === 'https://localhost' ?
+  'https://localhost:5500/_webaverse'
 :
   'https://app.webaverse.online';
+console.debug('inappPreviewHost(%o):%o', origin, inappPreviewHost)
 export const worldsHost = 'https://worlds.exokit.org';
 export const accountsHost = `https://${chainName}sidechain-accounts.webaverse.com`;
 export const contractsHost = 'https://contracts.webaverse.com';
@@ -84,10 +85,10 @@ export const avatarInterpolationNumFrames = 4;
 export const eatFrameIndices = [500, 800, 1100];
 export const drinkFrameIndices = [400, 700, 1000];
 
-export const voicePacksUrl = `https://webaverse.github.io/voicepacks/all_packs.json`;
+export const voicePacksUrl = `https://localhost:5500/_webaverse/voices/all_packs.json`// `https://webaverse.github.io/voicepacks/all_packs.json`;
 
 export const voiceEndpoint = `https://voice.webaverse.com/tts`;
-export const voiceEndpointsUrl = `https://raw.githubusercontent.com/webaverse/tiktalknet/main/model_lists/all_models.json`;
+export const voiceEndpointsUrl = `https://localhost:5500/_webaverse/voices/all_models.json` // `https://raw.githubusercontent.com/webaverse/tiktalknet/main/model_lists/all_models.json`;
 
 export const chatTextSpeed = 15;
 export const shakeAnimationSpeed = 30;

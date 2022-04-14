@@ -6,8 +6,10 @@ import ethereumJsTx from './ethereumjs-tx.js';
 import { makePromise } from './util.js';
 import { chainName, web3MainnetSidechainEndpoint, web3TestnetSidechainEndpoint, polygonVigilKey } from './constants.js';
 const { Transaction, Common } = ethereumJsTx;
-import addresses from 'https://contracts.webaverse.com/config/addresses.js';
-import abis from 'https://contracts.webaverse.com/config/abi.js';
+import addresses from './config/addresses.js'// 'https://contracts.webaverse.com/config/addresses.js';
+import abis from './config/abi.js' // 'https://contracts.webaverse.com/config/abi.js';
+// console.debug('addresses> %o', addresses);
+// console.debug('abis> %o', abis);
 
 export const Networks = {
   mainnet: {

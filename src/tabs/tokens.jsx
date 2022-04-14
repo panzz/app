@@ -13,6 +13,7 @@ import styles from '../Header.module.css';
 
 export const Tokens = ({userOpen, loginFrom, hacks, address}) => {
 
+    // console.debug('Tokens> userOpen:%o, loginFrom:%o, hacks:%o, address:%o', userOpen, loginFrom, hacks, address)
     const { state } = useContext( AppContext );
     const [nftPreviews, setNftPreviews] = useState({});
     const [nfts, setNfts] = useState(null);
@@ -23,6 +24,7 @@ export const Tokens = ({userOpen, loginFrom, hacks, address}) => {
     useEffect( () => {
 
         if ( address && !nfts && loginFrom ) {
+            console.debug('Tokens> address:%o, nfts:%o, loginFrom:%o', address, nfts, loginFrom)
 
             setNfts([]);
 
@@ -38,6 +40,7 @@ export const Tokens = ({userOpen, loginFrom, hacks, address}) => {
                 } else if (loginFrom === 'discord') {
 
                     let res = await fetch(`${tokensHost}/${address}`);
+                    console.debug('tokens.jsx> res(%o):%o', address, res)
                     res = await res.json();
 
                     res = res.map(_nft => {
@@ -48,7 +51,14 @@ export const Tokens = ({userOpen, loginFrom, hacks, address}) => {
 
                     });
 
-                    setNfts(res);
+                    // setNfts(res);
+                    setNfts([{
+                        id: new Date().getTime(), 
+                        asset_contract: 'contract', 
+                        hash: 'hash', 
+                        name: 'name', 
+                        description: 'desc'
+                    }]);
 
                 }
 

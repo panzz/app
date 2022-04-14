@@ -1,0 +1,1687 @@
+[
+  {
+    "name": "actions/F_Tiffany_AngryGrunt1.wav",
+    "offset": 0,
+    "duration": 0.6549886621315193
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt10.wav",
+    "offset": 0.6549886621315193,
+    "duration": 0.79562358276644
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt11.wav",
+    "offset": 1.4506122448979593,
+    "duration": 0.78
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt12.wav",
+    "offset": 2.2306122448979595,
+    "duration": 0.8268707482993197
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt13.wav",
+    "offset": 3.0574829931972793,
+    "duration": 0.5612471655328798
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt14.wav",
+    "offset": 3.618730158730159,
+    "duration": 0.9362585034013605
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt15.wav",
+    "offset": 4.554988662131519,
+    "duration": 0.8893650793650794
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt16.wav",
+    "offset": 5.444353741496599,
+    "duration": 1.1081179138321995
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt17.wav",
+    "offset": 6.552471655328798,
+    "duration": 0.8112471655328798
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt18.wav",
+    "offset": 7.363718820861678,
+    "duration": 0.8893650793650794
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt19.wav",
+    "offset": 8.253083900226757,
+    "duration": 1.04562358276644
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt2.wav",
+    "offset": 9.298707482993198,
+    "duration": 0.5768707482993197
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt20.wav",
+    "offset": 9.875578231292517,
+    "duration": 0.9831292517006802
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt3.wav",
+    "offset": 10.858707482993196,
+    "duration": 0.7175056689342404
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt4.wav",
+    "offset": 11.576213151927437,
+    "duration": 0.45188208616780046
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt5.wav",
+    "offset": 12.028095238095238,
+    "duration": 0.6081179138321996
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt6.wav",
+    "offset": 12.636213151927437,
+    "duration": 0.5143764172335601
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt7.wav",
+    "offset": 13.150589569160998,
+    "duration": 0.4831292517006803
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt8.wav",
+    "offset": 13.633718820861677,
+    "duration": 0.79562358276644
+  },
+  {
+    "name": "actions/F_Tiffany_AngryGrunt9.wav",
+    "offset": 14.429342403628118,
+    "duration": 0.9050113378684808
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt1.wav",
+    "offset": 15.3343537414966,
+    "duration": 0.18625850340136055
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt10.wav",
+    "offset": 15.52061224489796,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt11.wav",
+    "offset": 15.67562358276644,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt12.wav",
+    "offset": 15.83063492063492,
+    "duration": 0.17063492063492064
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt13.wav",
+    "offset": 16.00126984126984,
+    "duration": 0.19408163265306122
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt14.wav",
+    "offset": 16.195351473922898,
+    "duration": 0.18428571428571427
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt15.wav",
+    "offset": 16.379637188208612,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt16.wav",
+    "offset": 16.534648526077092,
+    "duration": 0.22727891156462585
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt17.wav",
+    "offset": 16.761927437641717,
+    "duration": 0.21360544217687075
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt18.wav",
+    "offset": 16.975532879818587,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt2.wav",
+    "offset": 17.130544217687067,
+    "duration": 0.17063492063492064
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt3.wav",
+    "offset": 17.301179138321988,
+    "duration": 0.1784580498866213
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt4.wav",
+    "offset": 17.47963718820861,
+    "duration": 0.17063492063492064
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt5.wav",
+    "offset": 17.65027210884353,
+    "duration": 0.17063492063492064
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt6.wav",
+    "offset": 17.82090702947845,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt7.wav",
+    "offset": 17.97591836734693,
+    "duration": 0.17063492063492064
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt8.wav",
+    "offset": 18.146553287981853,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "actions/F_Tiffany_AttackGrunt9.wav",
+    "offset": 18.301564625850332,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp1.wav",
+    "offset": 18.456575963718812,
+    "duration": 0.7643764172335601
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp10.wav",
+    "offset": 19.220952380952372,
+    "duration": 0.6706349206349206
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp11.wav",
+    "offset": 19.891587301587293,
+    "duration": 0.46750566893424034
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp12.wav",
+    "offset": 20.359092970521534,
+    "duration": 1.7487528344671202
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp2.wav",
+    "offset": 22.107845804988653,
+    "duration": 0.533922902494331
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp3.wav",
+    "offset": 22.641768707482985,
+    "duration": 0.4909297052154195
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp4.wav",
+    "offset": 23.132698412698403,
+    "duration": 0.6784353741496598
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp5.wav",
+    "offset": 23.811133786848064,
+    "duration": 0.79562358276644
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp6.wav",
+    "offset": 24.606757369614503,
+    "duration": 0.8581179138321996
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp7.wav",
+    "offset": 25.464875283446702,
+    "duration": 1.1706349206349207
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp8.wav",
+    "offset": 26.635510204081623,
+    "duration": 1.7487528344671202
+  },
+  {
+    "name": "actions/F_Tiffany_Gasp9.wav",
+    "offset": 28.38426303854874,
+    "duration": 0.6549886621315193
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt1.wav",
+    "offset": 29.03925170068026,
+    "duration": 0.4050113378684807
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt10.wav",
+    "offset": 29.44426303854874,
+    "duration": 0.5143764172335601
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt11.wav",
+    "offset": 29.9586394557823,
+    "duration": 0.6706349206349206
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt12.wav",
+    "offset": 30.62927437641722,
+    "duration": 0.5065532879818594
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt13.wav",
+    "offset": 31.13582766439908,
+    "duration": 0.66281179138322
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt14.wav",
+    "offset": 31.7986394557823,
+    "duration": 0.4831292517006803
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt15.wav",
+    "offset": 32.28176870748298,
+    "duration": 0.44405895691609976
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt16.wav",
+    "offset": 32.725827664399084,
+    "duration": 0.46750566893424034
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt17.wav",
+    "offset": 33.19333333333332,
+    "duration": 0.9831292517006802
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt18.wav",
+    "offset": 34.176462585034,
+    "duration": 0.5143764172335601
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt19.wav",
+    "offset": 34.690839002267566,
+    "duration": 0.4831292517006803
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt2.wav",
+    "offset": 35.17396825396825,
+    "duration": 0.5143764172335601
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt20.wav",
+    "offset": 35.688344671201804,
+    "duration": 0.5924943310657597
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt21.wav",
+    "offset": 36.28083900226756,
+    "duration": 0.7487528344671202
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt22.wav",
+    "offset": 37.02959183673468,
+    "duration": 0.54562358276644
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt3.wav",
+    "offset": 37.57521541950112,
+    "duration": 0.608140589569161
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt4.wav",
+    "offset": 38.18335600907028,
+    "duration": 0.38936507936507936
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt5.wav",
+    "offset": 38.57272108843536,
+    "duration": 0.49875283446712015
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt6.wav",
+    "offset": 39.07147392290248,
+    "duration": 0.42063492063492064
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt7.wav",
+    "offset": 39.492108843537395,
+    "duration": 0.49875283446712015
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt8.wav",
+    "offset": 39.990861678004514,
+    "duration": 0.7331292517006802
+  },
+  {
+    "name": "actions/F_Tiffany_PainGrunt9.wav",
+    "offset": 40.723990929705195,
+    "duration": 0.31124716553287984
+  },
+  {
+    "name": "actions/F_Tiffany_Scream1.wav",
+    "offset": 41.03523809523808,
+    "duration": 2.01437641723356
+  },
+  {
+    "name": "actions/F_Tiffany_Scream10.wav",
+    "offset": 43.049614512471635,
+    "duration": 2.2175056689342405
+  },
+  {
+    "name": "actions/F_Tiffany_Scream11.wav",
+    "offset": 45.26712018140587,
+    "duration": 1.7331292517006802
+  },
+  {
+    "name": "actions/F_Tiffany_Scream12.wav",
+    "offset": 47.00024943310655,
+    "duration": 1.4206349206349207
+  },
+  {
+    "name": "actions/F_Tiffany_Scream13.wav",
+    "offset": 48.42088435374147,
+    "duration": 1.53
+  },
+  {
+    "name": "actions/F_Tiffany_Scream14.wav",
+    "offset": 49.95088435374147,
+    "duration": 2.28
+  },
+  {
+    "name": "actions/F_Tiffany_Scream15.wav",
+    "offset": 52.23088435374147,
+    "duration": 2.73312925170068
+  },
+  {
+    "name": "actions/F_Tiffany_Scream16.wav",
+    "offset": 54.964013605442155,
+    "duration": 2.4987528344671204
+  },
+  {
+    "name": "actions/F_Tiffany_Scream17.wav",
+    "offset": 57.462766439909274,
+    "duration": 2.5612471655328797
+  },
+  {
+    "name": "actions/F_Tiffany_Scream18.wav",
+    "offset": 60.02401360544215,
+    "duration": 1.9518820861678003
+  },
+  {
+    "name": "actions/F_Tiffany_Scream2.wav",
+    "offset": 61.97589569160995,
+    "duration": 2.1550113378684808
+  },
+  {
+    "name": "actions/F_Tiffany_Scream3.wav",
+    "offset": 64.13090702947844,
+    "duration": 2.1549886621315193
+  },
+  {
+    "name": "actions/F_Tiffany_Scream4.wav",
+    "offset": 66.28589569160995,
+    "duration": 1.2175056689342403
+  },
+  {
+    "name": "actions/F_Tiffany_Scream5.wav",
+    "offset": 67.50340136054419,
+    "duration": 1.2331292517006802
+  },
+  {
+    "name": "actions/F_Tiffany_Scream6.wav",
+    "offset": 68.73653061224486,
+    "duration": 1.6237414965986394
+  },
+  {
+    "name": "actions/F_Tiffany_Scream7.wav",
+    "offset": 70.3602721088435,
+    "duration": 1.29562358276644
+  },
+  {
+    "name": "actions/F_Tiffany_Scream8.wav",
+    "offset": 71.65589569160994,
+    "duration": 1.6237414965986394
+  },
+  {
+    "name": "actions/F_Tiffany_Scream9.wav",
+    "offset": 73.27963718820858,
+    "duration": 2.54562358276644
+  },
+  {
+    "name": "syllables/1.wav",
+    "offset": 75.82526077097502,
+    "duration": 0.19015873015873017
+  },
+  {
+    "name": "syllables/10.wav",
+    "offset": 76.01541950113375,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "syllables/100.wav",
+    "offset": 76.17043083900224,
+    "duration": 0.2595011337868481
+  },
+  {
+    "name": "syllables/101.wav",
+    "offset": 76.42993197278908,
+    "duration": 0.2643764172335601
+  },
+  {
+    "name": "syllables/102.wav",
+    "offset": 76.69430839002264,
+    "duration": 0.4050113378684807
+  },
+  {
+    "name": "syllables/103.wav",
+    "offset": 77.09931972789113,
+    "duration": 0.31126984126984125
+  },
+  {
+    "name": "syllables/104.wav",
+    "offset": 77.41058956916098,
+    "duration": 0.20970521541950113
+  },
+  {
+    "name": "syllables/105.wav",
+    "offset": 77.62029478458048,
+    "duration": 0.4050113378684807
+  },
+  {
+    "name": "syllables/106.wav",
+    "offset": 78.02530612244897,
+    "duration": 0.3307936507936508
+  },
+  {
+    "name": "syllables/107.wav",
+    "offset": 78.35609977324262,
+    "duration": 0.3893877551020408
+  },
+  {
+    "name": "syllables/108.wav",
+    "offset": 78.74548752834465,
+    "duration": 0.24485260770975056
+  },
+  {
+    "name": "syllables/109.wav",
+    "offset": 78.9903401360544,
+    "duration": 0.34251700680272107
+  },
+  {
+    "name": "syllables/11.wav",
+    "offset": 79.33285714285712,
+    "duration": 0.18625850340136055
+  },
+  {
+    "name": "syllables/110.wav",
+    "offset": 79.51911564625848,
+    "duration": 0.20188208616780046
+  },
+  {
+    "name": "syllables/111.wav",
+    "offset": 79.72099773242628,
+    "duration": 0.24875283446712018
+  },
+  {
+    "name": "syllables/112.wav",
+    "offset": 79.96975056689341,
+    "duration": 0.4050113378684807
+  },
+  {
+    "name": "syllables/113.wav",
+    "offset": 80.3747619047619,
+    "duration": 0.2643764172335601
+  },
+  {
+    "name": "syllables/114.wav",
+    "offset": 80.63913832199546,
+    "duration": 0.28
+  },
+  {
+    "name": "syllables/115.wav",
+    "offset": 80.91913832199546,
+    "duration": 0.19015873015873017
+  },
+  {
+    "name": "syllables/116.wav",
+    "offset": 81.10929705215419,
+    "duration": 0.3268934240362812
+  },
+  {
+    "name": "syllables/117.wav",
+    "offset": 81.43619047619048,
+    "duration": 0.42063492063492064
+  },
+  {
+    "name": "syllables/118.wav",
+    "offset": 81.8568253968254,
+    "duration": 0.358140589569161
+  },
+  {
+    "name": "syllables/119.wav",
+    "offset": 82.21496598639456,
+    "duration": 0.2643764172335601
+  },
+  {
+    "name": "syllables/12.wav",
+    "offset": 82.47934240362812,
+    "duration": 0.17453514739229026
+  },
+  {
+    "name": "syllables/120.wav",
+    "offset": 82.65387755102041,
+    "duration": 0.18625850340136055
+  },
+  {
+    "name": "syllables/121.wav",
+    "offset": 82.84013605442178,
+    "duration": 0.36594104308390024
+  },
+  {
+    "name": "syllables/122.wav",
+    "offset": 83.20607709750567,
+    "duration": 0.29564625850340137
+  },
+  {
+    "name": "syllables/123.wav",
+    "offset": 83.50172335600907,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/124.wav",
+    "offset": 83.7192290249433,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "syllables/125.wav",
+    "offset": 83.87424036281179,
+    "duration": 0.24095238095238095
+  },
+  {
+    "name": "syllables/126.wav",
+    "offset": 84.11519274376417,
+    "duration": 0.18235827664399093
+  },
+  {
+    "name": "syllables/127.wav",
+    "offset": 84.29755102040816,
+    "duration": 0.3190702947845805
+  },
+  {
+    "name": "syllables/128.wav",
+    "offset": 84.61662131519275,
+    "duration": 0.2634013605442177
+  },
+  {
+    "name": "syllables/129.wav",
+    "offset": 84.88002267573697,
+    "duration": 0.3034467120181406
+  },
+  {
+    "name": "syllables/13.wav",
+    "offset": 85.18346938775511,
+    "duration": 0.2643764172335601
+  },
+  {
+    "name": "syllables/130.wav",
+    "offset": 85.44784580498867,
+    "duration": 0.25657596371882085
+  },
+  {
+    "name": "syllables/131.wav",
+    "offset": 85.70442176870749,
+    "duration": 0.3034467120181406
+  },
+  {
+    "name": "syllables/132.wav",
+    "offset": 86.00786848072563,
+    "duration": 0.3542403628117914
+  },
+  {
+    "name": "syllables/133.wav",
+    "offset": 86.36210884353743,
+    "duration": 0.16673469387755102
+  },
+  {
+    "name": "syllables/134.wav",
+    "offset": 86.52884353741499,
+    "duration": 0.25657596371882085
+  },
+  {
+    "name": "syllables/135.wav",
+    "offset": 86.7854195011338,
+    "duration": 0.2682993197278912
+  },
+  {
+    "name": "syllables/136.wav",
+    "offset": 87.05371882086169,
+    "duration": 0.45188208616780046
+  },
+  {
+    "name": "syllables/137.wav",
+    "offset": 87.50560090702949,
+    "duration": 0.3620408163265306
+  },
+  {
+    "name": "syllables/138.wav",
+    "offset": 87.86764172335602,
+    "duration": 0.20578231292517007
+  },
+  {
+    "name": "syllables/139.wav",
+    "offset": 88.07342403628118,
+    "duration": 0.25267573696145124
+  },
+  {
+    "name": "syllables/14.wav",
+    "offset": 88.32609977324263,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "syllables/140.wav",
+    "offset": 88.48111111111112,
+    "duration": 0.3073469387755102
+  },
+  {
+    "name": "syllables/141.wav",
+    "offset": 88.78845804988663,
+    "duration": 0.42845804988662134
+  },
+  {
+    "name": "syllables/142.wav",
+    "offset": 89.21691609977324,
+    "duration": 0.39718820861678006
+  },
+  {
+    "name": "syllables/143.wav",
+    "offset": 89.61410430839003,
+    "duration": 0.36594104308390024
+  },
+  {
+    "name": "syllables/144.wav",
+    "offset": 89.98004535147392,
+    "duration": 0.28782312925170067
+  },
+  {
+    "name": "syllables/145.wav",
+    "offset": 90.26786848072562,
+    "duration": 0.299546485260771
+  },
+  {
+    "name": "syllables/146.wav",
+    "offset": 90.5674149659864,
+    "duration": 0.36986394557823127
+  },
+  {
+    "name": "syllables/147.wav",
+    "offset": 90.93727891156463,
+    "duration": 0.3737641723356009
+  },
+  {
+    "name": "syllables/148.wav",
+    "offset": 91.31104308390023,
+    "duration": 0.24095238095238095
+  },
+  {
+    "name": "syllables/149.wav",
+    "offset": 91.55199546485261,
+    "duration": 0.42063492063492064
+  },
+  {
+    "name": "syllables/15.wav",
+    "offset": 91.97263038548753,
+    "duration": 0.2721995464852608
+  },
+  {
+    "name": "syllables/150.wav",
+    "offset": 92.24482993197279,
+    "duration": 0.20578231292517007
+  },
+  {
+    "name": "syllables/151.wav",
+    "offset": 92.45061224489795,
+    "duration": 0.1784580498866213
+  },
+  {
+    "name": "syllables/152.wav",
+    "offset": 92.62907029478457,
+    "duration": 0.24485260770975056
+  },
+  {
+    "name": "syllables/153.wav",
+    "offset": 92.87392290249431,
+    "duration": 0.2682993197278912
+  },
+  {
+    "name": "syllables/154.wav",
+    "offset": 93.1422222222222,
+    "duration": 0.20578231292517007
+  },
+  {
+    "name": "syllables/155.wav",
+    "offset": 93.34800453514737,
+    "duration": 0.19798185941043084
+  },
+  {
+    "name": "syllables/156.wav",
+    "offset": 93.5459863945578,
+    "duration": 0.3737641723356009
+  },
+  {
+    "name": "syllables/157.wav",
+    "offset": 93.9197505668934,
+    "duration": 0.2760997732426304
+  },
+  {
+    "name": "syllables/158.wav",
+    "offset": 94.19585034013603,
+    "duration": 0.4362585034013605
+  },
+  {
+    "name": "syllables/159.wav",
+    "offset": 94.6321088435374,
+    "duration": 0.3268934240362812
+  },
+  {
+    "name": "syllables/16.wav",
+    "offset": 94.95900226757368,
+    "duration": 0.23705215419501133
+  },
+  {
+    "name": "syllables/160.wav",
+    "offset": 95.1960544217687,
+    "duration": 0.36594104308390024
+  },
+  {
+    "name": "syllables/161.wav",
+    "offset": 95.56199546485259,
+    "duration": 0.21360544217687075
+  },
+  {
+    "name": "syllables/162.wav",
+    "offset": 95.77560090702946,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "syllables/163.wav",
+    "offset": 95.93061224489794,
+    "duration": 0.22532879818594104
+  },
+  {
+    "name": "syllables/164.wav",
+    "offset": 96.15594104308389,
+    "duration": 0.3737641723356009
+  },
+  {
+    "name": "syllables/165.wav",
+    "offset": 96.52970521541948,
+    "duration": 0.24485260770975056
+  },
+  {
+    "name": "syllables/166.wav",
+    "offset": 96.77455782312923,
+    "duration": 0.4557823129251701
+  },
+  {
+    "name": "syllables/167.wav",
+    "offset": 97.2303401360544,
+    "duration": 0.24485260770975056
+  },
+  {
+    "name": "syllables/168.wav",
+    "offset": 97.47519274376414,
+    "duration": 0.3464172335600907
+  },
+  {
+    "name": "syllables/169.wav",
+    "offset": 97.82160997732423,
+    "duration": 0.4831292517006803
+  },
+  {
+    "name": "syllables/17.wav",
+    "offset": 98.3047392290249,
+    "duration": 0.22532879818594104
+  },
+  {
+    "name": "syllables/170.wav",
+    "offset": 98.53006802721085,
+    "duration": 0.22922902494331066
+  },
+  {
+    "name": "syllables/171.wav",
+    "offset": 98.75929705215415,
+    "duration": 0.3034467120181406
+  },
+  {
+    "name": "syllables/172.wav",
+    "offset": 99.0627437641723,
+    "duration": 0.3854875283446712
+  },
+  {
+    "name": "syllables/173.wav",
+    "offset": 99.44823129251697,
+    "duration": 0.17453514739229026
+  },
+  {
+    "name": "syllables/174.wav",
+    "offset": 99.62276643990926,
+    "duration": 0.4128344671201814
+  },
+  {
+    "name": "syllables/175.wav",
+    "offset": 100.03560090702943,
+    "duration": 0.19408163265306122
+  },
+  {
+    "name": "syllables/176.wav",
+    "offset": 100.2296825396825,
+    "duration": 0.3464172335600907
+  },
+  {
+    "name": "syllables/177.wav",
+    "offset": 100.57609977324259,
+    "duration": 0.20188208616780046
+  },
+  {
+    "name": "syllables/178.wav",
+    "offset": 100.77798185941039,
+    "duration": 0.3307936507936508
+  },
+  {
+    "name": "syllables/179.wav",
+    "offset": 101.10877551020404,
+    "duration": 0.20970521541950113
+  },
+  {
+    "name": "syllables/18.wav",
+    "offset": 101.31848072562354,
+    "duration": 0.20188208616780046
+  },
+  {
+    "name": "syllables/180.wav",
+    "offset": 101.52036281179134,
+    "duration": 0.23705215419501133
+  },
+  {
+    "name": "syllables/181.wav",
+    "offset": 101.75741496598636,
+    "duration": 0.3307936507936508
+  },
+  {
+    "name": "syllables/182.wav",
+    "offset": 102.08820861678001,
+    "duration": 0.29564625850340137
+  },
+  {
+    "name": "syllables/183.wav",
+    "offset": 102.3838548752834,
+    "duration": 0.3464172335600907
+  },
+  {
+    "name": "syllables/184.wav",
+    "offset": 102.7302721088435,
+    "duration": 0.24875283446712018
+  },
+  {
+    "name": "syllables/185.wav",
+    "offset": 102.97902494331062,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/186.wav",
+    "offset": 103.19653061224486,
+    "duration": 0.19798185941043084
+  },
+  {
+    "name": "syllables/187.wav",
+    "offset": 103.39451247165529,
+    "duration": 0.25267573696145124
+  },
+  {
+    "name": "syllables/188.wav",
+    "offset": 103.64718820861674,
+    "duration": 0.31126984126984125
+  },
+  {
+    "name": "syllables/189.wav",
+    "offset": 103.95845804988659,
+    "duration": 0.358140589569161
+  },
+  {
+    "name": "syllables/19.wav",
+    "offset": 104.31659863945575,
+    "duration": 0.31126984126984125
+  },
+  {
+    "name": "syllables/190.wav",
+    "offset": 104.6278684807256,
+    "duration": 0.4831292517006803
+  },
+  {
+    "name": "syllables/191.wav",
+    "offset": 105.11099773242627,
+    "duration": 0.15891156462585035
+  },
+  {
+    "name": "syllables/192.wav",
+    "offset": 105.26990929705212,
+    "duration": 0.17063492063492064
+  },
+  {
+    "name": "syllables/193.wav",
+    "offset": 105.44054421768705,
+    "duration": 0.2604761904761905
+  },
+  {
+    "name": "syllables/194.wav",
+    "offset": 105.70102040816325,
+    "duration": 0.22142857142857142
+  },
+  {
+    "name": "syllables/195.wav",
+    "offset": 105.92244897959182,
+    "duration": 0.3776643990929705
+  },
+  {
+    "name": "syllables/196.wav",
+    "offset": 106.30011337868478,
+    "duration": 0.2917233560090703
+  },
+  {
+    "name": "syllables/197.wav",
+    "offset": 106.59183673469386,
+    "duration": 0.3737641723356009
+  },
+  {
+    "name": "syllables/198.wav",
+    "offset": 106.96560090702945,
+    "duration": 0.4362585034013605
+  },
+  {
+    "name": "syllables/199.wav",
+    "offset": 107.40185941043082,
+    "duration": 0.2917233560090703
+  },
+  {
+    "name": "syllables/2.wav",
+    "offset": 107.69358276643989,
+    "duration": 0.20383219954648527
+  },
+  {
+    "name": "syllables/20.wav",
+    "offset": 107.89741496598637,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/200.wav",
+    "offset": 108.11492063492061,
+    "duration": 0.1628344671201814
+  },
+  {
+    "name": "syllables/201.wav",
+    "offset": 108.27775510204079,
+    "duration": 0.28
+  },
+  {
+    "name": "syllables/202.wav",
+    "offset": 108.55775510204079,
+    "duration": 0.3542403628117914
+  },
+  {
+    "name": "syllables/203.wav",
+    "offset": 108.91199546485258,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/204.wav",
+    "offset": 109.12950113378682,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/205.wav",
+    "offset": 109.34700680272105,
+    "duration": 0.42845804988662134
+  },
+  {
+    "name": "syllables/206.wav",
+    "offset": 109.77546485260767,
+    "duration": 0.31517006802721087
+  },
+  {
+    "name": "syllables/207.wav",
+    "offset": 110.09063492063488,
+    "duration": 0.358140589569161
+  },
+  {
+    "name": "syllables/208.wav",
+    "offset": 110.44877551020404,
+    "duration": 0.19015873015873017
+  },
+  {
+    "name": "syllables/209.wav",
+    "offset": 110.63893424036277,
+    "duration": 0.15891156462585035
+  },
+  {
+    "name": "syllables/21.wav",
+    "offset": 110.79784580498863,
+    "duration": 0.20188208616780046
+  },
+  {
+    "name": "syllables/210.wav",
+    "offset": 110.99972789115643,
+    "duration": 0.22532879818594104
+  },
+  {
+    "name": "syllables/211.wav",
+    "offset": 111.22505668934237,
+    "duration": 0.2917233560090703
+  },
+  {
+    "name": "syllables/212.wav",
+    "offset": 111.51678004535144,
+    "duration": 0.15891156462585035
+  },
+  {
+    "name": "syllables/213.wav",
+    "offset": 111.67569160997729,
+    "duration": 0.2643764172335601
+  },
+  {
+    "name": "syllables/214.wav",
+    "offset": 111.94006802721086,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/215.wav",
+    "offset": 112.15757369614509,
+    "duration": 0.23312925170068027
+  },
+  {
+    "name": "syllables/216.wav",
+    "offset": 112.39070294784577,
+    "duration": 0.19015873015873017
+  },
+  {
+    "name": "syllables/217.wav",
+    "offset": 112.5808616780045,
+    "duration": 0.20578231292517007
+  },
+  {
+    "name": "syllables/218.wav",
+    "offset": 112.78664399092966,
+    "duration": 0.2682993197278912
+  },
+  {
+    "name": "syllables/219.wav",
+    "offset": 113.05494331065755,
+    "duration": 0.20578231292517007
+  },
+  {
+    "name": "syllables/22.wav",
+    "offset": 113.26072562358272,
+    "duration": 0.28
+  },
+  {
+    "name": "syllables/220.wav",
+    "offset": 113.54072562358272,
+    "duration": 0.25267573696145124
+  },
+  {
+    "name": "syllables/221.wav",
+    "offset": 113.79340136054417,
+    "duration": 0.1784580498866213
+  },
+  {
+    "name": "syllables/222.wav",
+    "offset": 113.97185941043078,
+    "duration": 0.17063492063492064
+  },
+  {
+    "name": "syllables/223.wav",
+    "offset": 114.1424943310657,
+    "duration": 0.24875283446712018
+  },
+  {
+    "name": "syllables/224.wav",
+    "offset": 114.39124716553283,
+    "duration": 0.45970521541950116
+  },
+  {
+    "name": "syllables/225.wav",
+    "offset": 114.85095238095234,
+    "duration": 0.36594104308390024
+  },
+  {
+    "name": "syllables/226.wav",
+    "offset": 115.21689342403623,
+    "duration": 0.22532879818594104
+  },
+  {
+    "name": "syllables/227.wav",
+    "offset": 115.44222222222217,
+    "duration": 0.24095238095238095
+  },
+  {
+    "name": "syllables/228.wav",
+    "offset": 115.68317460317455,
+    "duration": 0.1784580498866213
+  },
+  {
+    "name": "syllables/229.wav",
+    "offset": 115.86163265306116,
+    "duration": 0.358140589569161
+  },
+  {
+    "name": "syllables/23.wav",
+    "offset": 116.21977324263032,
+    "duration": 0.19408163265306122
+  },
+  {
+    "name": "syllables/230.wav",
+    "offset": 116.41385487528339,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/231.wav",
+    "offset": 116.63136054421763,
+    "duration": 0.21360544217687075
+  },
+  {
+    "name": "syllables/232.wav",
+    "offset": 116.8449659863945,
+    "duration": 0.299546485260771
+  },
+  {
+    "name": "syllables/233.wav",
+    "offset": 117.14451247165528,
+    "duration": 0.29564625850340137
+  },
+  {
+    "name": "syllables/234.wav",
+    "offset": 117.44015873015867,
+    "duration": 0.3268934240362812
+  },
+  {
+    "name": "syllables/235.wav",
+    "offset": 117.76705215419496,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/236.wav",
+    "offset": 117.9845578231292,
+    "duration": 0.2643764172335601
+  },
+  {
+    "name": "syllables/237.wav",
+    "offset": 118.24893424036276,
+    "duration": 0.20970521541950113
+  },
+  {
+    "name": "syllables/238.wav",
+    "offset": 118.45863945578226,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/239.wav",
+    "offset": 118.6761451247165,
+    "duration": 0.3190702947845805
+  },
+  {
+    "name": "syllables/24.wav",
+    "offset": 118.99521541950108,
+    "duration": 0.23312925170068027
+  },
+  {
+    "name": "syllables/240.wav",
+    "offset": 119.22834467120175,
+    "duration": 0.19015873015873017
+  },
+  {
+    "name": "syllables/241.wav",
+    "offset": 119.41850340136048,
+    "duration": 0.23312925170068027
+  },
+  {
+    "name": "syllables/242.wav",
+    "offset": 119.65163265306116,
+    "duration": 0.36594104308390024
+  },
+  {
+    "name": "syllables/243.wav",
+    "offset": 120.01757369614505,
+    "duration": 0.31126984126984125
+  },
+  {
+    "name": "syllables/244.wav",
+    "offset": 120.3288435374149,
+    "duration": 0.36594104308390024
+  },
+  {
+    "name": "syllables/245.wav",
+    "offset": 120.69478458049879,
+    "duration": 0.23705215419501133
+  },
+  {
+    "name": "syllables/246.wav",
+    "offset": 120.9318367346938,
+    "duration": 0.23312925170068027
+  },
+  {
+    "name": "syllables/247.wav",
+    "offset": 121.16496598639448,
+    "duration": 0.299546485260771
+  },
+  {
+    "name": "syllables/25.wav",
+    "offset": 121.46451247165525,
+    "duration": 0.24095238095238095
+  },
+  {
+    "name": "syllables/26.wav",
+    "offset": 121.70546485260763,
+    "duration": 0.3737641723356009
+  },
+  {
+    "name": "syllables/27.wav",
+    "offset": 122.07922902494323,
+    "duration": 0.28
+  },
+  {
+    "name": "syllables/28.wav",
+    "offset": 122.35922902494323,
+    "duration": 0.31126984126984125
+  },
+  {
+    "name": "syllables/29.wav",
+    "offset": 122.67049886621308,
+    "duration": 0.34251700680272107
+  },
+  {
+    "name": "syllables/3.wav",
+    "offset": 123.0130158730158,
+    "duration": 0.24290249433106575
+  },
+  {
+    "name": "syllables/30.wav",
+    "offset": 123.25591836734687,
+    "duration": 0.3854875283446712
+  },
+  {
+    "name": "syllables/31.wav",
+    "offset": 123.64140589569153,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/32.wav",
+    "offset": 123.85891156462577,
+    "duration": 0.3229705215419501
+  },
+  {
+    "name": "syllables/33.wav",
+    "offset": 124.18188208616772,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/34.wav",
+    "offset": 124.39938775510196,
+    "duration": 0.1784580498866213
+  },
+  {
+    "name": "syllables/35.wav",
+    "offset": 124.57784580498857,
+    "duration": 0.2917233560090703
+  },
+  {
+    "name": "syllables/36.wav",
+    "offset": 124.86956916099764,
+    "duration": 0.33859410430839004
+  },
+  {
+    "name": "syllables/37.wav",
+    "offset": 125.20816326530603,
+    "duration": 0.25267573696145124
+  },
+  {
+    "name": "syllables/38.wav",
+    "offset": 125.46083900226748,
+    "duration": 0.3737641723356009
+  },
+  {
+    "name": "syllables/39.wav",
+    "offset": 125.83460317460307,
+    "duration": 0.21360544217687075
+  },
+  {
+    "name": "syllables/4.wav",
+    "offset": 126.04820861677995,
+    "duration": 0.2760997732426304
+  },
+  {
+    "name": "syllables/40.wav",
+    "offset": 126.32430839002258,
+    "duration": 0.20970521541950113
+  },
+  {
+    "name": "syllables/41.wav",
+    "offset": 126.53401360544208,
+    "duration": 0.24875283446712018
+  },
+  {
+    "name": "syllables/42.wav",
+    "offset": 126.78276643990921,
+    "duration": 0.24485260770975056
+  },
+  {
+    "name": "syllables/43.wav",
+    "offset": 127.02761904761896,
+    "duration": 0.22922902494331066
+  },
+  {
+    "name": "syllables/44.wav",
+    "offset": 127.25684807256226,
+    "duration": 0.2604761904761905
+  },
+  {
+    "name": "syllables/45.wav",
+    "offset": 127.51732426303846,
+    "duration": 0.16868480725623583
+  },
+  {
+    "name": "syllables/46.wav",
+    "offset": 127.6860090702947,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/47.wav",
+    "offset": 127.90351473922894,
+    "duration": 0.2604761904761905
+  },
+  {
+    "name": "syllables/48.wav",
+    "offset": 128.16399092970514,
+    "duration": 0.25267573696145124
+  },
+  {
+    "name": "syllables/49.wav",
+    "offset": 128.4166666666666,
+    "duration": 0.24875283446712018
+  },
+  {
+    "name": "syllables/5.wav",
+    "offset": 128.66541950113373,
+    "duration": 0.24875283446712018
+  },
+  {
+    "name": "syllables/50.wav",
+    "offset": 128.91417233560085,
+    "duration": 0.299546485260771
+  },
+  {
+    "name": "syllables/51.wav",
+    "offset": 129.21371882086163,
+    "duration": 0.25267573696145124
+  },
+  {
+    "name": "syllables/52.wav",
+    "offset": 129.4663945578231,
+    "duration": 0.22532879818594104
+  },
+  {
+    "name": "syllables/53.wav",
+    "offset": 129.69172335600902,
+    "duration": 0.20188208616780046
+  },
+  {
+    "name": "syllables/54.wav",
+    "offset": 129.89360544217683,
+    "duration": 0.17063492063492064
+  },
+  {
+    "name": "syllables/55.wav",
+    "offset": 130.06424036281174,
+    "duration": 0.42063492063492064
+  },
+  {
+    "name": "syllables/56.wav",
+    "offset": 130.48487528344666,
+    "duration": 0.29564625850340137
+  },
+  {
+    "name": "syllables/57.wav",
+    "offset": 130.78052154195007,
+    "duration": 0.31126984126984125
+  },
+  {
+    "name": "syllables/58.wav",
+    "offset": 131.0917913832199,
+    "duration": 0.3854875283446712
+  },
+  {
+    "name": "syllables/59.wav",
+    "offset": 131.47727891156458,
+    "duration": 0.23312925170068027
+  },
+  {
+    "name": "syllables/6.wav",
+    "offset": 131.71040816326527,
+    "duration": 0.34251700680272107
+  },
+  {
+    "name": "syllables/60.wav",
+    "offset": 132.052925170068,
+    "duration": 0.20188208616780046
+  },
+  {
+    "name": "syllables/61.wav",
+    "offset": 132.2548072562358,
+    "duration": 0.20188208616780046
+  },
+  {
+    "name": "syllables/62.wav",
+    "offset": 132.45668934240362,
+    "duration": 0.28782312925170067
+  },
+  {
+    "name": "syllables/63.wav",
+    "offset": 132.74451247165533,
+    "duration": 0.3737641723356009
+  },
+  {
+    "name": "syllables/64.wav",
+    "offset": 133.11827664399092,
+    "duration": 0.34251700680272107
+  },
+  {
+    "name": "syllables/65.wav",
+    "offset": 133.46079365079365,
+    "duration": 0.31126984126984125
+  },
+  {
+    "name": "syllables/66.wav",
+    "offset": 133.7720634920635,
+    "duration": 0.24875283446712018
+  },
+  {
+    "name": "syllables/67.wav",
+    "offset": 134.02081632653062,
+    "duration": 0.3190702947845805
+  },
+  {
+    "name": "syllables/68.wav",
+    "offset": 134.3398866213152,
+    "duration": 0.45970521541950116
+  },
+  {
+    "name": "syllables/69.wav",
+    "offset": 134.7995918367347,
+    "duration": 0.20970521541950113
+  },
+  {
+    "name": "syllables/7.wav",
+    "offset": 135.00929705215418,
+    "duration": 0.3503174603174603
+  },
+  {
+    "name": "syllables/70.wav",
+    "offset": 135.35961451247164,
+    "duration": 0.3893877551020408
+  },
+  {
+    "name": "syllables/71.wav",
+    "offset": 135.74900226757367,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/72.wav",
+    "offset": 135.96650793650792,
+    "duration": 0.2682993197278912
+  },
+  {
+    "name": "syllables/73.wav",
+    "offset": 136.23480725623583,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/74.wav",
+    "offset": 136.45231292517008,
+    "duration": 0.2721995464852608
+  },
+  {
+    "name": "syllables/75.wav",
+    "offset": 136.72451247165534,
+    "duration": 0.3229705215419501
+  },
+  {
+    "name": "syllables/76.wav",
+    "offset": 137.0474829931973,
+    "duration": 0.18625850340136055
+  },
+  {
+    "name": "syllables/77.wav",
+    "offset": 137.23374149659864,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/78.wav",
+    "offset": 137.4512471655329,
+    "duration": 0.28
+  },
+  {
+    "name": "syllables/79.wav",
+    "offset": 137.7312471655329,
+    "duration": 0.1784580498866213
+  },
+  {
+    "name": "syllables/8.wav",
+    "offset": 137.9097052154195,
+    "duration": 0.25657596371882085
+  },
+  {
+    "name": "syllables/80.wav",
+    "offset": 138.16628117913834,
+    "duration": 0.17063492063492064
+  },
+  {
+    "name": "syllables/81.wav",
+    "offset": 138.33691609977325,
+    "duration": 0.24875283446712018
+  },
+  {
+    "name": "syllables/82.wav",
+    "offset": 138.58566893424037,
+    "duration": 0.19015873015873017
+  },
+  {
+    "name": "syllables/83.wav",
+    "offset": 138.77582766439912,
+    "duration": 0.31126984126984125
+  },
+  {
+    "name": "syllables/84.wav",
+    "offset": 139.08709750566896,
+    "duration": 0.28
+  },
+  {
+    "name": "syllables/85.wav",
+    "offset": 139.36709750566897,
+    "duration": 0.18625850340136055
+  },
+  {
+    "name": "syllables/86.wav",
+    "offset": 139.5533560090703,
+    "duration": 0.18625850340136055
+  },
+  {
+    "name": "syllables/87.wav",
+    "offset": 139.73961451247166,
+    "duration": 0.1784580498866213
+  },
+  {
+    "name": "syllables/88.wav",
+    "offset": 139.91807256235828,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/89.wav",
+    "offset": 140.13557823129253,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/9.wav",
+    "offset": 140.35308390022678,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/90.wav",
+    "offset": 140.57058956916103,
+    "duration": 0.28
+  },
+  {
+    "name": "syllables/91.wav",
+    "offset": 140.85058956916103,
+    "duration": 0.2721995464852608
+  },
+  {
+    "name": "syllables/92.wav",
+    "offset": 141.1227891156463,
+    "duration": 0.3737641723356009
+  },
+  {
+    "name": "syllables/93.wav",
+    "offset": 141.4965532879819,
+    "duration": 0.15501133786848073
+  },
+  {
+    "name": "syllables/94.wav",
+    "offset": 141.65156462585037,
+    "duration": 0.34251700680272107
+  },
+  {
+    "name": "syllables/95.wav",
+    "offset": 141.9940816326531,
+    "duration": 0.28
+  },
+  {
+    "name": "syllables/96.wav",
+    "offset": 142.2740816326531,
+    "duration": 0.28
+  },
+  {
+    "name": "syllables/97.wav",
+    "offset": 142.5540816326531,
+    "duration": 0.24875283446712018
+  },
+  {
+    "name": "syllables/98.wav",
+    "offset": 142.80283446712022,
+    "duration": 0.21750566893424036
+  },
+  {
+    "name": "syllables/99.wav",
+    "offset": 143.02034013605447,
+    "duration": 0.2736734693877551
+  }
+]

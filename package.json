@@ -1,10 +1,11 @@
 {
   "name": "webaverse-app",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "start": "forever start index.mjs -p",
+    "old-start": "forever start index.mjs -p",
+    "start": "node index.mjs -p",
     "dev": "node index.mjs",
     "prod": "sudo $(which node) index.mjs -p",
     "build": "vite build",

@@ -90,7 +90,8 @@ class Wallet {
     });
   }
 
-  async walletPromise(action, data, waitForAction, timeOutPromise = 30) {
+  async walletPromise(action, data, waitForAction, timeOutPromise = 10) {
+    console.debug('walletPromise> action:%o, data:%o, waitForAction:%o, timeOutPromise:%o', action, data, waitForAction, timeOutPromise);
     const self = this;
 
     /** Parcels contains encoded message & its signature */
@@ -100,13 +101,37 @@ class Wallet {
         action: action,
       },
     });
+    // console.debug('walletPromise> parcel:%o', parcel);
 
     return new Promise((resolve, reject) => {
+      console.debug('walletPromise> postMessage(%o)', nativeStrings.postMessage === self.iframe.contentWindow.postMessage.toString());
       if (nativeStrings.postMessage === self.iframe.contentWindow.postMessage.toString()) {
-        self.iframe.contentWindow.postMessage({
-          action: 'signed_message',
-          message: parcel,
-        }, walletHost);
+        console.debug('walletPromise> walletHost:%o', walletHost);
+        // self.iframe.contentWindow.postMessage({
+        //   action: 'signed_message',
+        //   message: parcel,
+        // }, walletHost);
+
+        function makeId(length) {
+          let result = '';
+          const characters = 'abcdef0123456789';
+          for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+          }
+          return '0x'+result;
+        }
+
+        setTimeout(() => {
+          console.debug('walletPromise> clearTimeout');
+          clearTimeout(t);
+          window.removeEventListener('message', f, false);
+          const data = {
+            address: makeId(40), // 0x08e242bb06d85073e69222af8273af419d19e4f6 https://github.com/webaverse/app/issues/1543
+            error: null
+          }
+          console.debug('walletPromise> data:%o', data);
+          resolve(data);
+        }, 3000);
       } else {
         /** Empty reject halts the execution without stacktrace */
         new Promise((resolve, reject) => { reject(); });
@@ -120,7 +145,9 @@ class Wallet {
       }, timeOutPromise * 1000);
 
       f = event => {
+        // console.debug('walletPromise> event.origin:%o, walletHost:%o', event.origin, walletHost);
         if (`${event.origin}` !== walletHost) { return; }
+        // console.debug('walletPromise> event.data.method:%o, waitForAction:%o', event.data.method, waitForAction);
         if (event.data.method === waitForAction) {
           clearTimeout(t);
           window.removeEventListener('message', f, false);
@@ -135,21 +162,25 @@ class Wallet {
   }
 
   async sign(message) {
+    // console.debug('sign> message:%o', message);
     const fs = window.crypto.subtle.sign.toString();
     const encoded = new TextEncoder().encode(JSON.stringify(message));
+    // console.debug('sign> encoded:%o', encoded);
     let signature;
+    // console.debug('sign> fs === nativeStrings.sign:%o', fs === nativeStrings.sign);
     if (fs === nativeStrings.sign) {
       signature = await window.crypto.subtle.sign({name: 'ECDSA', hash: {name: 'SHA-384'}}, pk, encoded);
     } else {
       /** Empty reject halts the execution without stacktrace */
       new Promise((resolve, reject) => { reject(); });
     }
+    // console.debug('sign> signature:%o', signature);
     return {encoded, signature};
   }
 
   async autoLogin() {
     return this.walletPromise('getUserData', {}, 'wallet_userdata').catch(e => {
-      console.warn(e);
+      console.warn('autoLogin> e:%o', e);
     });
   }
 

@@ -1,0 +1,7 @@
+{
+  "name": "ramp",
+  "start_url": "index.js",
+  "components": {
+    "physics": "solid"
+  }
+}

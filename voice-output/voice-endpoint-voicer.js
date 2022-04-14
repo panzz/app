@@ -16,6 +16,7 @@ class PreloadMessage {
     this.isPreloadMessage = true;
     this.loadPromise = this.parent.loadAudioBuffer(this.text);
   }
+
   waitForLoad() {
     return this.loadPromise;
   }
@@ -31,21 +32,26 @@ class VoiceEndpointVoicer {
     this.cancel = null;
     this.endPromise = null;
   }
+
   preloadMessage(text) {
     return new PreloadMessage(text, this);
   }
+
   async loadAudioBuffer(text) {
     const u = new URL(this.voiceEndpoint.url.toString());
     u.searchParams.set('s', text);
-    const res = await fetch(u/*, {
+    const res = await fetch(
+      u, /*, {
       mode: 'cors',
-    } */);
+    } */
+    );
     const arrayBuffer = await res.arrayBuffer();
 
     const audioContext = Avatar.getAudioContext();
     const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
     return audioBuffer;
   }
+
   start(text) {
     if (!this.endPromise) {
       this.endPromise = makePromise();
@@ -59,26 +65,32 @@ class VoiceEndpointVoicer {
       }
 
       (async () => {
-        const audioBuffer = await (text.isPreloadMessage ? text.waitForLoad() : this.loadAudioBuffer(text));
+        const audioBuffer = await (text.isPreloadMessage
+          ? text.waitForLoad()
+          : this.loadAudioBuffer(text));
 
         const audioContext = Avatar.getAudioContext();
         const audioBufferSourceNode = audioContext.createBufferSource();
         audioBufferSourceNode.buffer = audioBuffer;
-        audioBufferSourceNode.addEventListener('ended', () => {
-          this.cancel = null;
-          this.running = false;
+        audioBufferSourceNode.addEventListener(
+          'ended',
+          () => {
+            this.cancel = null;
+            this.running = false;
 
-          if (this.live) {
-            if (this.queue.length > 0) {
-              const text = this.queue.shift();
-              this.start(text);
-            } else {
-              const {endPromise} = this;
-              this.endPromise = null;
-              endPromise.accept();
+            if (this.live) {
+              if (this.queue.length > 0) {
+                const text = this.queue.shift();
+                this.start(text);
+              } else {
+                const {endPromise} = this;
+                this.endPromise = null;
+                endPromise.accept();
+              }
             }
-          }
-        }, {once: true});
+          },
+          {once: true},
+        );
         audioBufferSourceNode.connect(this.player.avatar.getAudioInput());
         audioBufferSourceNode.start();
 
@@ -94,6 +106,7 @@ class VoiceEndpointVoicer {
     }
     return this.endPromise;
   }
+
   stop() {
     this.live = false;
     if (this.cancel) {
@@ -103,8 +116,4 @@ class VoiceEndpointVoicer {
   }
 }
 
-export {
-  VoiceEndpoint,
-  PreloadMessage,
-  VoiceEndpointVoicer,
-};
+export {VoiceEndpoint, PreloadMessage, VoiceEndpointVoicer};

@@ -19,18 +19,37 @@ class Universe extends EventTarget {
     this.currentWorld = null;
     this.sceneLoadedPromise = null;
   }
+
   getWorldsHost() {
-    return window.location.protocol + '//' + window.location.hostname + ':' +
-      ((window.location.port ? parseInt(window.location.port, 10) : (window.location.protocol === 'https:' ? 443 : 80)) + 1) + '/worlds/';
+    return (
+      window.location.protocol +
+      '//' +
+      window.location.hostname +
+      ':' +
+      ((window.location.port
+        ? parseInt(window.location.port, 10)
+        : window.location.protocol === 'https:'
+          ? 443
+          : 80) +
+        1) +
+      '/worlds/'
+    );
   }
+
   async enterWorld(worldSpec) {
+    // https://localhost:3000/?room=123
+    console.debug('enterWorld> worldSpec:%o', worldSpec);
     world.disconnectRoom();
-    
+
     const localPlayer = metaversefile.useLocalPlayer();
     /* localPlayer.teleportTo(new THREE.Vector3(0, 1.5, 0), camera.quaternion, {
       relation: 'float',
     }); */
-    localPlayer.position.set(0, initialPosY, 0);
+    // localPlayer.position.set(0, initialPosY, 0);
+    const initialPosX = -12.86;
+    const initialPosZ = 1.68;
+    localPlayer.position.set(initialPosX, initialPosY, initialPosZ);
+    console.debug('enterWorld> position.set %o:%o:%o', initialPosX, initialPosY, initialPosZ);
     localPlayer.resetPhysics();
     localPlayer.updateMatrixWorld();
     // physicsManager.setPhysicsEnabled(true);
@@ -42,31 +61,36 @@ class Universe extends EventTarget {
 
       const promises = [];
       const {src, room} = worldSpec;
+      console.debug('enterWorld> src:%o, room:%o', src, room);
       if (!room) {
         const state = new Z.Doc();
         world.connectState(state);
-        
+
         if (src === undefined) {
-          promises.push(metaversefile.createAppAsync({
-            start_url: './scenes/' + sceneNames[0],
-          }));
+          promises.push(
+            metaversefile.createAppAsync({
+              start_url: './scenes/' + sceneNames[0],
+            }),
+          );
         } else if (src === '') {
           // nothing
         } else {
-          promises.push(metaversefile.createAppAsync({
-            start_url: src,
-          }));
+          promises.push(
+            metaversefile.createAppAsync({
+              start_url: src,
+            }),
+          );
         }
       } else {
         const p = (async () => {
           const roomUrl = this.getWorldsHost() + room;
+          console.debug('enterWorld> roomUrl:%o', roomUrl);
           await world.connectRoom(roomUrl);
         })();
         promises.push(p);
       }
-      
-      this.sceneLoadedPromise = Promise.all(promises)
-        .then(() => {});
+
+      this.sceneLoadedPromise = Promise.all(promises).then(() => {});
       await this.sceneLoadedPromise;
       this.sceneLoadedPromise = null;
     };
@@ -82,21 +106,28 @@ class Universe extends EventTarget {
 
     this.dispatchEvent(new MessageEvent('worldload'));
   }
+
   async reload() {
+    console.debug('universe:reload')
     await this.enterWorld(this.currentWorld);
   }
+
   async pushUrl(u) {
     history.pushState({}, '', u);
     window.dispatchEvent(new MessageEvent('pushstate'));
     await this.handleUrlUpdate();
   }
+
   async handleUrlUpdate() {
     const q = parseQuery(location.search);
+    console.debug('universe:handleUrlUpdate> q:%o', q);
     await this.enterWorld(q);
   }
+
   isSceneLoaded() {
     return !this.sceneLoadedPromise;
   }
+
   async waitForSceneLoaded() {
     if (this.sceneLoadedPromise) {
       await this.sceneLoadedPromise;

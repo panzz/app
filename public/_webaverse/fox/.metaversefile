@@ -1,0 +1,20 @@
+{
+  "name": "fox",
+  "start_url": "fox.glb",
+  "components": [
+    {
+      "key": "look",
+      "value": {
+        "rootBone": "Neck_1"
+      }
+    },
+    {
+      "key": "pet",
+      "value": {
+        "idleAnimation": "",
+        "walkAnimation": "Walk",
+        "runAnimation": ""
+      }
+    }
+  ]
+}

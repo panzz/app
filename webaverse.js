@@ -52,9 +52,7 @@ const sessionOpts = {
     'local-floor',
     // 'bounded-floor',
   ],
-  optionalFeatures: [
-    'hand-tracking',
-  ],
+  optionalFeatures: ['hand-tracking'],
 };
 
 const frameEvent = new MessageEvent('frame', {
@@ -66,11 +64,19 @@ const frameEvent = new MessageEvent('frame', {
 });
 const _pushRenderSettings = () => {
   const renderSettings = renderSettingsManager.findRenderSettings(rootScene);
-  renderSettingsManager.applyRenderSettingsToSceneAndPostProcessing(renderSettings, rootScene, postProcessing);
+  renderSettingsManager.applyRenderSettingsToSceneAndPostProcessing(
+    renderSettings,
+    rootScene,
+    postProcessing,
+  );
 
   return () => {
-    renderSettingsManager.applyRenderSettingsToSceneAndPostProcessing(null, rootScene, postProcessing);
-  }
+    renderSettingsManager.applyRenderSettingsToSceneAndPostProcessing(
+      null,
+      rootScene,
+      postProcessing,
+    );
+  };
 };
 
 export default class Webaverse extends EventTarget {
@@ -91,7 +97,7 @@ export default class Webaverse extends EventTarget {
     })();
     this.contentLoaded = false;
   }
-  
+
   waitForLoad() {
     return this.loadPromise;
   }
@@ -99,35 +105,43 @@ export default class Webaverse extends EventTarget {
   getRenderer() {
     return getRenderer();
   }
+
   getScene() {
     return scene;
   }
+
   getSceneHighPriority() {
     return sceneHighPriority;
   }
+
   getSceneLowPriority() {
     return sceneLowPriority;
   }
+
   getCamera() {
     return camera;
   }
-  
+
   setContentLoaded() {
     this.contentLoaded = true;
   }
+
   bindInput() {
     ioManager.bindInput();
   }
+
   bindInterface() {
     ioManager.bindInterface();
     blockchain.bindInterface();
   }
+
   bindCanvas(c) {
     bindCanvas(c);
     game.bindDioramaCanvas();
-    
+
     postProcessing.bindCanvas();
   }
+
   async isXrSupported() {
     if (navigator.xr) {
       let ok = false;
@@ -141,6 +155,7 @@ export default class Webaverse extends EventTarget {
       return false;
     }
   }
+
   async enterXr() {
     const renderer = getRenderer();
     const session = renderer.xr.getSession();
@@ -148,10 +163,10 @@ export default class Webaverse extends EventTarget {
       let session = null;
       try {
         session = await navigator.xr.requestSession(sessionMode, sessionOpts);
-      } catch(err) {
+      } catch (err) {
         try {
           session = await navigator.xr.requestSession(sessionMode);
-        } catch(err) {
+        } catch (err) {
           console.warn(err);
         }
       }
@@ -168,7 +183,7 @@ export default class Webaverse extends EventTarget {
       await session.end();
     }
   }
-  
+
   /* injectRigInput() {
     let leftGamepadPosition, leftGamepadQuaternion, leftGamepadPointer, leftGamepadGrip, leftGamepadEnabled;
     let rightGamepadPosition, rightGamepadQuaternion, rightGamepadPointer, rightGamepadGrip, rightGamepadEnabled;
@@ -262,7 +277,7 @@ export default class Webaverse extends EventTarget {
       [rightGamepadPosition, rightGamepadQuaternion, rightGamepadPointer, rightGamepadGrip, rightGamepadEnabled],
     ]);
   } */
-  
+
   render(timestamp, timeDiff) {
     // console.log('frame 1');
 
@@ -273,22 +288,24 @@ export default class Webaverse extends EventTarget {
 
     getComposer().render();
 
-    this.dispatchEvent(new MessageEvent('frameend', {
-      data: {
-        canvas: renderer.domElement,
-        context: renderer.getContext(),
-      }
-    }));
+    this.dispatchEvent(
+      new MessageEvent('frameend', {
+        data: {
+          canvas: renderer.domElement,
+          context: renderer.getContext(),
+        },
+      }),
+    );
 
     // console.log('frame 2');
   }
-  
+
   startLoop() {
     const renderer = getRenderer();
     if (!renderer) {
       throw new Error('must bind canvas first');
     }
-    
+
     let lastTimestamp = performance.now();
     const animate = (timestamp, frame) => {
       performanceTracker.startFrame();
@@ -302,7 +319,7 @@ export default class Webaverse extends EventTarget {
         const _pre = () => {
           ioManager.update(timeDiffCapped);
           // this.injectRigInput();
-          
+
           const localPlayer = metaversefileApi.useLocalPlayer();
           if (this.contentLoaded && physicsManager.getPhysicsEnabled()) {
             physicsManager.simulatePhysics(timeDiffCapped);
@@ -311,10 +328,10 @@ export default class Webaverse extends EventTarget {
 
           transformControls.update();
           game.update(timestamp, timeDiffCapped);
-          
+
           localPlayer.updateAvatar(timestamp, timeDiffCapped);
           playersManager.update(timestamp, timeDiffCapped);
-          
+
           world.appManager.tick(timestamp, timeDiffCapped, frame);
 
           hpManager.update(timestamp, timeDiffCapped);
@@ -327,11 +344,15 @@ export default class Webaverse extends EventTarget {
 
           const session = renderer.xr.getSession();
           const xrCamera = session ? renderer.xr.getCamera(camera) : camera;
-          localMatrix.multiplyMatrices(xrCamera.projectionMatrix, /*localMatrix2.multiplyMatrices(*/xrCamera.matrixWorldInverse/*, physx.worldContainer.matrixWorld)*/);
-          localMatrix2.copy(xrCamera.matrix)
+          localMatrix.multiplyMatrices(
+            xrCamera.projectionMatrix,
+            /* localMatrix2.multiplyMatrices( */ xrCamera.matrixWorldInverse, /*, physx.worldContainer.matrixWorld) */
+          );
+          localMatrix2
+            .copy(xrCamera.matrix)
             .premultiply(dolly.matrix)
             .decompose(localVector, localQuaternion, localVector2);
-          
+
           lastTimestamp = timestamp;
         };
         _pre();
@@ -356,7 +377,7 @@ export default class Webaverse extends EventTarget {
       _frame();
 
       performanceTracker.endFrame();
-    }
+    };
     renderer.setAnimationLoop(animate);
 
     _startHacks(this);
@@ -366,7 +387,9 @@ export default class Webaverse extends EventTarget {
 // import {MMDLoader} from 'three/examples/jsm/loaders/MMDLoader.js';
 const _startHacks = webaverse => {
   const localPlayer = metaversefileApi.useLocalPlayer();
-  const vpdAnimations = Avatar.getAnimations().filter(animation => animation.name.endsWith('.vpd'));
+  const vpdAnimations = Avatar.getAnimations().filter(animation =>
+    animation.name.endsWith('.vpd'),
+  );
 
   // let playerDiorama = null;
   const lastEmoteKey = {
@@ -377,11 +400,11 @@ const _startHacks = webaverse => {
   let poseAnimationIndex = -1;
   const _emoteKey = key => {
     const timestamp = performance.now();
-    if ((timestamp - lastEmoteKey.timestamp) < 1000) {
+    if (timestamp - lastEmoteKey.timestamp < 1000) {
       const key1 = lastEmoteKey.key;
       const key2 = key;
-      emoteIndex = (key1 * 10) + key2;
-      
+      emoteIndex = key1 * 10 + key2;
+
       lastEmoteKey.key = -1;
       lastEmoteKey.timestamp = 0;
     } else {
@@ -390,7 +413,9 @@ const _startHacks = webaverse => {
     }
   };
   const _updateEmote = () => {
-    const oldEmoteActionIndex = localPlayer.findActionIndex(action => action.type === 'emote' && /^emotion-/.test(action.emotion));
+    const oldEmoteActionIndex = localPlayer.findActionIndex(
+      action => action.type === 'emote' && /^emotion-/.test(action.emotion),
+    );
     if (oldEmoteActionIndex !== -1) {
       localPlayer.removeActionIndex(oldEmoteActionIndex);
     }
@@ -531,39 +556,53 @@ const _startHacks = webaverse => {
   }; */
   webaverse.titleCardHack = false;
   window.addEventListener('keydown', e => {
-    if (e.which === 46) { // .
+    if (e.which === 46) {
+      // .
       emoteIndex = -1;
       _updateEmote();
-    } else if (e.which === 107) { // +
+    } else if (e.which === 107) {
+      // +
       poseAnimationIndex++;
-      poseAnimationIndex = Math.min(Math.max(poseAnimationIndex, -1), vpdAnimations.length - 1);
-      _updatePoseAnimation();
-    
-      // _ensureMikuModel();
-      // _updateMikuModel();
-    } else if (e.which === 109) { // -
-      poseAnimationIndex--;
-      poseAnimationIndex = Math.min(Math.max(poseAnimationIndex, -1), vpdAnimations.length - 1);
+      poseAnimationIndex = Math.min(
+        Math.max(poseAnimationIndex, -1),
+        vpdAnimations.length - 1,
+      );
       _updatePoseAnimation();
 
       // _ensureMikuModel();
       // _updateMikuModel();
-    } else if (e.which === 106) { // *
+    } else if (e.which === 109) {
+      // -
+      poseAnimationIndex--;
+      poseAnimationIndex = Math.min(
+        Math.max(poseAnimationIndex, -1),
+        vpdAnimations.length - 1,
+      );
+      _updatePoseAnimation();
+
+      // _ensureMikuModel();
+      // _updateMikuModel();
+    } else if (e.which === 106) {
+      // *
       webaverse.titleCardHack = !webaverse.titleCardHack;
-      webaverse.dispatchEvent(new MessageEvent('titlecardhackchange', {
-        data: {
-          titleCardHack: webaverse.titleCardHack,
-        }
-      }));
-    } else if (e.which === 111) { // /
+      webaverse.dispatchEvent(
+        new MessageEvent('titlecardhackchange', {
+          data: {
+            titleCardHack: webaverse.titleCardHack,
+          },
+        }),
+      );
+    } else if (e.which === 111) {
+      // /
       (async () => {
         const offscreenEngine = new OffscreenEngine();
         // await offscreenEngine.waitForLoad();
 
         const fn = offscreenEngine.createFunction([
-          `import * as THREE from 'three';`,
+          'import * as THREE from \'three\';',
           function(a, b) {
-            return new THREE.Vector3().fromArray(a)
+            return new THREE.Vector3()
+              .fromArray(a)
               .add(new THREE.Vector3().fromArray(b))
               .toArray();
           },

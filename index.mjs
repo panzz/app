@@ -23,8 +23,8 @@ const _tryReadFile = p => {
   }
 };
 const certs = {
-  key: _tryReadFile('./certs/privkey.pem') || _tryReadFile('./certs-local/privkey.pem'),
-  cert: _tryReadFile('./certs/fullchain.pem') || _tryReadFile('./certs-local/fullchain.pem'),
+  key: _tryReadFile('./certs/localhost.key') || _tryReadFile('./certs-local/privkey.pem'),
+  cert: _tryReadFile('./certs/localhost.crt') || _tryReadFile('./certs-local/fullchain.pem'),
 };
 
 function makeId(length) {
@@ -108,16 +108,16 @@ const _proxyUrl = (req, res, u) => {
     }
   });
 
+  // http or https server
   const isHttps = !process.env.HTTP_ONLY && (!!certs.key && !!certs.cert);
   const port = parseInt(process.env.PORT, 10) || (isProduction ? 443 : 3000);
   const wsPort = port + 1;
-
   const _makeHttpServer = () => isHttps ? https.createServer(certs, app) : http.createServer(app);
   const httpServer = _makeHttpServer();
   const viteServer = await vite.createServer({
     server: {
       middlewareMode: 'html',
-      force:true,
+      force: true,
       hmr: {
         server: httpServer,
         port,
@@ -126,7 +126,7 @@ const _proxyUrl = (req, res, u) => {
     }
   });
   app.use(viteServer.middlewares);
-  
+
   await new Promise((accept, reject) => {
     httpServer.listen(port, '0.0.0.0', () => {
       accept();
@@ -134,7 +134,8 @@ const _proxyUrl = (req, res, u) => {
     httpServer.on('error', reject);
   });
   console.log(`  > Local: http${isHttps ? 's' : ''}://localhost:${port}/`);
-  
+
+  // ws server
   const wsServer = (() => {
     if (isHttps) {
       return https.createServer(certs);
@@ -142,11 +143,12 @@ const _proxyUrl = (req, res, u) => {
       return http.createServer();
     }
   })();
+
   const initialRoomState = (() => {
     const s = fs.readFileSync('./scenes/gunroom.scn', 'utf8');
     const j = JSON.parse(s);
     const {objects} = j;
-    
+
     const appsMapName = 'apps';
     const result = {
       [appsMapName]: [],

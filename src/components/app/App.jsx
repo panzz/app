@@ -1,243 +1,210 @@
+import React, { useState, useEffect, useRef, createContext } from "react";
 
-import React, { useState, useEffect, useRef, createContext } from 'react';
+import { defaultAvatarUrl } from "../../../constants";
 
-import { defaultAvatarUrl } from '../../../constants';
+import game from "../../../game";
+import sceneNames from "../../../scenes/scenes.json";
+import { parseQuery } from "../../../util.js";
+import Webaverse from "../../../webaverse.js";
+import universe from "../../../universe.js";
+import metaversefileApi from "../../../metaversefile-api";
+import cameraManager from "../../../camera-manager";
+import { world } from "../../../world";
 
-import game from '../../../game';
-import sceneNames from '../../../scenes/scenes.json';
-import { parseQuery } from '../../../util.js'
-import Webaverse from '../../../webaverse.js';
-import universe from '../../../universe.js';
-import metaversefileApi from '../../../metaversefile-api';
-import cameraManager from '../../../camera-manager';
-import { world } from '../../../world';
+import { ActionMenu } from "../general/action-menu";
+import { Crosshair } from "../general/crosshair";
+import { Settings } from "../general/settings";
+import { WorldObjectsList } from "../general/world-objects-list";
+import {
+  IoHandler,
+  registerIoEventHandler,
+  unregisterIoEventHandler,
+} from "../general/io-handler";
+import { ZoneTitleCard } from "../general/zone-title-card";
+import { MapGen } from "../general/map-gen/MapGen.jsx";
+import { LoadingBox } from "../../LoadingBox.jsx";
+import { DragAndDrop } from "../../DragAndDrop.jsx";
+import { Stats } from "../../Stats.jsx";
+import { PlayMode } from "../play-mode";
+import { EditorMode } from "../editor-mode";
+import Header from "../../Header.jsx";
 
-import { ActionMenu } from '../general/action-menu';
-import { Crosshair } from '../general/crosshair';
-import { Settings } from '../general/settings';
-import { WorldObjectsList } from '../general/world-objects-list';
-import { IoHandler, registerIoEventHandler, unregisterIoEventHandler } from '../general/io-handler';
-import { ZoneTitleCard } from '../general/zone-title-card';
-import { MapGen } from '../general/map-gen/MapGen.jsx';
-import { LoadingBox } from '../../LoadingBox.jsx';
-import { DragAndDrop } from '../../DragAndDrop.jsx';
-import { Stats } from '../../Stats.jsx';
-import { PlayMode } from '../play-mode';
-import { EditorMode } from '../editor-mode';
-import Header from '../../Header.jsx';
-
-import styles from './App.module.css';
+import styles from "./App.module.css";
 
 //
 
-const _startApp = async ( weba, canvas ) => {
+const _startApp = async (weba, canvas) => {
+  weba.setContentLoaded();
 
-    weba.setContentLoaded();
+  weba.bindInput();
+  weba.bindInterface();
+  weba.bindCanvas(canvas);
 
-    weba.bindInput();
-    weba.bindInterface();
-    weba.bindCanvas( canvas );
+  await weba.waitForLoad();
+  universe.handleUrlUpdate();
+  await weba.startLoop();
 
-    await weba.waitForLoad();
-    universe.handleUrlUpdate();
-    await weba.startLoop();
-
-    const localPlayer = metaversefileApi.useLocalPlayer();
-    await localPlayer.setAvatarUrl( defaultAvatarUrl );
-
+  const localPlayer = metaversefileApi.useLocalPlayer();
+  await localPlayer.setAvatarUrl(defaultAvatarUrl);
 };
 
 const _getCurrentSceneSrc = () => {
+  const q = parseQuery(window.location.search);
+  let { src } = q;
 
-    const q = parseQuery( window.location.search );
-    let { src } = q;
+  if (src === undefined) {
+    src = "./scenes/" + sceneNames[0];
+  }
 
-    if ( src === undefined ) {
-
-        src = './scenes/' + sceneNames[0];
-
-    }
-
-    return src;
-
+  return src;
 };
 
 const _getCurrentRoom = () => {
-
-    const q = parseQuery( window.location.search );
-    const { room } = q;
-    return room || '';
-
+  const q = parseQuery(window.location.search);
+  const { room } = q;
+  return room || "";
 };
 
 export const AppContext = createContext();
 
 export const App = () => {
+  const [state, setState] = useState({ openedPanel: null });
 
-    const [ state, setState ] = useState({ openedPanel: null });
+  const canvasRef = useRef(null);
+  const [app, setApp] = useState(() => new Webaverse());
+  const [selectedApp, setSelectedApp] = useState(null);
+  const [selectedScene, setSelectedScene] = useState(_getCurrentSceneSrc());
+  const [selectedRoom, setSelectedRoom] = useState(_getCurrentRoom());
+  const [apps, setApps] = useState(world.appManager.getApps().slice());
 
-    const canvasRef = useRef( null );
-    const [ app, setApp ] = useState( () => new Webaverse() );
-    const [ selectedApp, setSelectedApp ] = useState( null );
-    const [ selectedScene, setSelectedScene ] = useState( _getCurrentSceneSrc() );
-    const [ selectedRoom, setSelectedRoom ] = useState( _getCurrentRoom() );
-    const [ apps, setApps ] = useState( world.appManager.getApps().slice() );
+  //
 
-    //
+  const selectApp = (app, physicsId, position) => {
+    game.setMouseSelectedObject(app, physicsId, position);
+  };
 
-    const selectApp = ( app, physicsId, position ) => {
+  const _loadUrlState = () => {
+    const src = _getCurrentSceneSrc();
+    setSelectedScene(src);
 
-        game.setMouseSelectedObject( app, physicsId, position );
+    const roomName = _getCurrentRoom();
+    setSelectedRoom(roomName);
+  };
 
+  useEffect(() => {
+    if (
+      state.openedPanel &&
+      state.openedPanel !== "ChatPanel" &&
+      cameraManager.pointerLockElement
+    ) {
+      cameraManager.exitPointerLock();
+    }
+  }, [state.openedPanel]);
+
+  useEffect(() => {
+    const handleClick = () => {
+      const hoverObject = game.getMouseHoverObject();
+
+      if (hoverObject) {
+        const physicsId = game.getMouseHoverPhysicsId();
+        const position = game.getMouseHoverPosition();
+        selectApp(hoverObject, physicsId, position);
+        return false;
+      }
+
+      return true;
     };
 
-    const _loadUrlState = () => {
+    registerIoEventHandler("click", handleClick);
 
-        const src = _getCurrentSceneSrc();
-        setSelectedScene( src );
+    return () => {
+      unregisterIoEventHandler("click", handleClick);
+    };
+  }, []);
 
-        const roomName = _getCurrentRoom();
-        setSelectedRoom( roomName );
-
+  useEffect(() => {
+    const update = (e) => {
+      setApps(world.appManager.getApps().slice());
     };
 
-    useEffect( () => {
+    world.appManager.addEventListener("appadd", update);
+    world.appManager.addEventListener("appremove", update);
+  }, []);
 
-        if ( state.openedPanel && state.openedPanel !== 'ChatPanel' && cameraManager.pointerLockElement ) {
-
-            cameraManager.exitPointerLock();
-
-        }
-
-    }, [ state.openedPanel ] );
-
-    useEffect( () => {
-
-        const handleClick = () => {
-
-            const hoverObject = game.getMouseHoverObject();
-
-            if ( hoverObject ) {
-
-                const physicsId = game.getMouseHoverPhysicsId();
-                const position = game.getMouseHoverPosition();
-                selectApp( hoverObject, physicsId, position );
-                return false;
-
-            }
-
-            return true;
-
-        };
-
-        registerIoEventHandler( 'click', handleClick );
-
-        return () => {
-
-            unregisterIoEventHandler( 'click', handleClick );
-
-        };
-
-    }, [] );
-
-    useEffect( () => {
-
-        const update = e => {
-
-            setApps( world.appManager.getApps().slice() );
-
-        };
-
-        world.appManager.addEventListener( 'appadd', update );
-        world.appManager.addEventListener( 'appremove', update );
-
-    }, [] );
-
-    useEffect( () => {
-
-        const pushstate = e => {
-
-            _loadUrlState();
-
-        };
-
-        const popstate = e => {
-
-            _loadUrlState();
-            universe.handleUrlUpdate();
-
-        };
-
-        window.addEventListener( 'pushstate', pushstate );
-        window.addEventListener( 'popstate', popstate );
-
-        return () => {
-
-            window.removeEventListener( 'pushstate', pushstate );
-            window.removeEventListener( 'popstate', popstate );
-
-        };
-
-    }, [] );
-
-    useEffect( _loadUrlState, [] );
-
-    useEffect( () => {
-
-        if ( canvasRef.current ) {
-
-            _startApp( app, canvasRef.current );
-
-        }
-
-    }, [ canvasRef ] );
-
-    //
-
-    const onDragOver = e => {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-    };
-    const onDragStart = e => {
-        // console.log('drag start', e);
-    };
-    const onDragEnd = e => {
-        // console.log('drag end', e);
+  useEffect(() => {
+    const pushstate = (e) => {
+      _loadUrlState();
     };
 
-    return (
-        <div
-            className={ styles.App }
-            id="app"
-            onDragStart={onDragStart}
-            onDragEnd={onDragEnd}
-            onDragOver={onDragOver}
-        >
-            <AppContext.Provider value={{ state, setState, app, setSelectedApp, selectedApp }}>
-                <Header setSelectedApp={ setSelectedApp } selectedApp={ selectedApp } />
-                <canvas className={ styles.canvas } ref={ canvasRef } />
-                <Crosshair />
-                <ActionMenu />
-                <Settings />
-                <WorldObjectsList
-                    setSelectedApp={ setSelectedApp }
-                    selectedApp={ selectedApp }
-                />
-                <PlayMode />
-                <EditorMode
-                    selectedScene={ selectedScene }
-                    setSelectedScene={ setSelectedScene }
-                    selectedRoom={ selectedRoom }
-                    setSelectedRoom={ setSelectedRoom }
-                />
-                <IoHandler />
-                <ZoneTitleCard />
-                <MapGen />
-                <LoadingBox />
-                <DragAndDrop />
-                <Stats app={ app } />
-            </AppContext.Provider>
-        </div>
-    );
+    const popstate = (e) => {
+      _loadUrlState();
+      universe.handleUrlUpdate();
+    };
 
+    window.addEventListener("pushstate", pushstate);
+    window.addEventListener("popstate", popstate);
+
+    return () => {
+      window.removeEventListener("pushstate", pushstate);
+      window.removeEventListener("popstate", popstate);
+    };
+  }, []);
+
+  useEffect(_loadUrlState, []);
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      _startApp(app, canvasRef.current);
+    }
+  }, [canvasRef]);
+
+  //
+
+  const onDragOver = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
+  const onDragStart = (e) => {
+    // console.log('drag start', e);
+  };
+  const onDragEnd = (e) => {
+    // console.log('drag end', e);
+  };
+
+  return (
+    <div
+      className={styles.App}
+      id="app"
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+      onDragOver={onDragOver}
+    >
+      <AppContext.Provider
+        value={{ state, setState, app, setSelectedApp, selectedApp }}
+      >
+        <Header setSelectedApp={setSelectedApp} selectedApp={selectedApp} />
+        <canvas className={styles.canvas} ref={canvasRef} />
+        <Crosshair />
+        <ActionMenu />
+        <Settings />
+        <WorldObjectsList
+          setSelectedApp={setSelectedApp}
+          selectedApp={selectedApp}
+        />
+        <PlayMode />
+        <EditorMode
+          selectedScene={selectedScene}
+          setSelectedScene={setSelectedScene}
+          selectedRoom={selectedRoom}
+          setSelectedRoom={setSelectedRoom}
+        />
+        <IoHandler />
+        <ZoneTitleCard />
+        <MapGen />
+        <LoadingBox />
+        <DragAndDrop />
+        <Stats app={app} />
+      </AppContext.Provider>
+    </div>
+  );
 };
