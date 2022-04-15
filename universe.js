@@ -12,6 +12,9 @@ import {parseQuery, parseCoord} from './util.js';
 import metaversefile from 'metaversefile';
 import sceneNames from './scenes/scenes.json';
 
+
+console.log('universe.js> meta.env:%o', import.meta.env)
+
 class Universe extends EventTarget {
   constructor() {
     super();
@@ -26,13 +29,7 @@ class Universe extends EventTarget {
       '//' +
       window.location.hostname +
       ':' +
-      ((window.location.port
-        ? parseInt(window.location.port, 10)
-        : window.location.protocol === 'https:'
-          ? 443
-          : 80) +
-        1) +
-      '/worlds/'
+      ((window.location.port ? parseInt(window.location.port, 10) : window.location.protocol === 'https:' ? 8080 : 80) + 1) + '/worlds/'
     );
   }
 

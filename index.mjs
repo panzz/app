@@ -6,11 +6,18 @@ import fs from 'fs';
 import express from 'express';
 import vite from 'vite';
 import wsrtc from 'wsrtc/wsrtc-server.mjs';
+import dotenv from 'dotenv'
+
+const result = dotenv.config()
+
+console.log('index.mjs> result(%o):%o', typeof result, result.parsed)
+console.log('index.mjs> process.env.VITE_APP_VERSION:%o', process.env.VITE_APP_VERSION)
 
 Error.stackTraceLimit = 300;
 const cwd = process.cwd();
 
 const isProduction = process.argv[2] === '-p';
+
 
 const _isMediaType = p => /\.(?:png|jpe?g|gif|svg|glb|mp3|wav|webm|mp4|mov)$/.test(p);
 
@@ -109,7 +116,7 @@ const _proxyUrl = (req, res, u) => {
   });
 
   // http or https server
-  const isHttps = !process.env.HTTP_ONLY && (!!certs.key && !!certs.cert);
+  const isHttps = !isProduction && !process.env.HTTP_ONLY && (!!certs.key && !!certs.cert);
   const port = parseInt(process.env.PORT, 10) || (isProduction ? 443 : 3000);
   const wsPort = port + 1;
   const _makeHttpServer = () => isHttps ? https.createServer(certs, app) : http.createServer(app);

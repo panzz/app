@@ -1,3 +1,5 @@
+console.log('constants.js> VITE_APP_VERSION:%o', import.meta.env.VITE_APP_VERSION)
+
 export const baseUnit = 4;
 export const previewExt = 'jpg';
 export const maxGrabDistance = 1.5;
@@ -85,10 +87,10 @@ export const avatarInterpolationNumFrames = 4;
 export const eatFrameIndices = [500, 800, 1100];
 export const drinkFrameIndices = [400, 700, 1000];
 
-export const voicePacksUrl = `https://localhost:5500/_webaverse/voices/all_packs.json`// `https://webaverse.github.io/voicepacks/all_packs.json`;
+export const voicePacksUrl = `https://localhost:5500/_webaverse/voices/all_packs.json`; // `https://webaverse.github.io/voicepacks/all_packs.json`;
 
 export const voiceEndpoint = `https://voice.webaverse.com/tts`;
-export const voiceEndpointsUrl = `https://localhost:5500/_webaverse/voices/all_models.json` // `https://raw.githubusercontent.com/webaverse/tiktalknet/main/model_lists/all_models.json`;
+export const voiceEndpointsUrl = `https://localhost:5500/_webaverse/voices/all_models.json`; // `https://raw.githubusercontent.com/webaverse/tiktalknet/main/model_lists/all_models.json`;
 
 export const chatTextSpeed = 15;
 export const shakeAnimationSpeed = 30;
