@@ -65,7 +65,7 @@ const heightFactor = 1.6;
 const baseRadius = 0.3;
 function loadPhysxCharacterController() {
   console.debug('loadPhysxCharacterController> avatar:%o', this.avatar)
-  const avatarHeight = this.avatar ? this.avatar.height : 0; // this.avatar.height;
+  const avatarHeight = this.avatar?.height || 1;
 
   const radius = baseRadius/heightFactor * avatarHeight;
   const height = avatarHeight - radius*2;
@@ -958,6 +958,7 @@ class LocalPlayer extends UninterpolatedPlayer {
       self.playerMap = new Z.Map();
       self.playersArray.push([self.playerMap]);
       self.playerMap.set('playerId', self.playerId);
+      const avatar = self.getAvatarState();
       self.playerMap.set('position', self.position.toArray(localArray3));
       self.playerMap.set('quaternion', self.quaternion.toArray(localArray4));
       
@@ -966,7 +967,7 @@ class LocalPlayer extends UninterpolatedPlayer {
         actions.push([oldAction]);
       }
       
-      const avatar = self.getAvatarState();
+      // const avatar = self.getAvatarState();
       const {instanceId} = oldAvatar;
       if (instanceId !== undefined) {
         avatar.set('instanceId', instanceId);
@@ -1063,7 +1064,7 @@ class LocalPlayer extends UninterpolatedPlayer {
       this.playerMap.set('quaternion', this.quaternion.toArray(localArray4));
     }, 'push');
 
-    this.appManager.updatePhysics();
+    // this.appManager.updatePhysics();
   }
   getSession() {
     const renderer = getRenderer();
@@ -1079,8 +1080,8 @@ class LocalPlayer extends UninterpolatedPlayer {
   updateAvatar(timestamp, timeDiff) {
     if (this.avatar) {
       const timeDiffS = timeDiff / 1000;
-      this.characterSfx.update(timestamp, timeDiffS);
-      this.characterFx.update(timestamp, timeDiffS);
+      this.characterSfx?.update(timestamp, timeDiffS);
+      this.characterFx?.update(timestamp, timeDiffS);
 
       this.updateInterpolation(timeDiff);
 
@@ -1090,7 +1091,7 @@ class LocalPlayer extends UninterpolatedPlayer {
 
       this.avatar.update(timestamp, timeDiff);
 
-      this.characterHups.update(timestamp);
+      this.characterHups?.update(timestamp);
     }
   }
   resetPhysics() {
@@ -1167,10 +1168,30 @@ class RemotePlayer extends InterpolatedPlayer {
       console.warn('binding to nonexistent player object', this.playersArray.toJSON());
     }
     
+    const lastPosition = new THREE.Vector3();
     const observePlayerFn = e => {
-      this.position.fromArray(this.playerMap.get('position'));
-      this.quaternion.fromArray(this.playerMap.get('quaternion'));
+      const transform = this.playerMap.get('transform');
+      
+      if (transform) {
+        lastPosition.copy(this.position)
+        this.position.fromArray(transform, 0);
+        this.quaternion.fromArray(transform, 3);
+
+        const remoteTimeDiff = transform[10];
+        
+        this.positionInterpolant?.snapshot(remoteTimeDiff);
+        this.quaternionInterpolant?.snapshot(remoteTimeDiff);
+
+        for (const actionBinaryInterpolant of this.actionBinaryInterpolantsArray) {
+          actionBinaryInterpolant.snapshot(remoteTimeDiff);
+        }
+        
+        if(this.avatar){  
+          this.avatar.setVelocity(remoteTimeDiff / 1000, lastPosition, this.position, this.quaternion);
+        }
+      }
     };
+
     this.playerMap.observe(observePlayerFn);
     this.unbindFns.push(this.playerMap.unobserve.bind(this.playerMap, observePlayerFn));
     
@@ -1178,6 +1199,12 @@ class RemotePlayer extends InterpolatedPlayer {
     this.appManager.loadApps();
     
     this.syncAvatar();
+  }
+
+  getSession() {
+    const renderer = getRenderer();
+    const session = renderer.xr.getSession();
+    return session;
   }
   updateAvatar(timestamp, timeDiff) {
 
@@ -1187,17 +1214,15 @@ class RemotePlayer extends InterpolatedPlayer {
       this.characterFx?.update(timestamp, timeDiffS);
 
       this.updateInterpolation(timeDiff);
+      const session = this.getSession();
       const mirrors = metaversefile.getMirrors();
-      applyPlayerToAvatar(this, null, this.avatar, mirrors);
+      applyPlayerToAvatar(this, session, this.avatar, mirrors);
 
       this.avatar.update(timestamp, timeDiff, false);
       this.characterHups?.update(timestamp);
     }
   }
   updatePhysics = () => {} // LocalPlayer.prototype.updatePhysics;
-  getSession() {
-    return null;
-  }
 }
 class StaticUninterpolatedPlayer extends PlayerBase {
   constructor(opts) {

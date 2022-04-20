@@ -26,20 +26,5 @@ export default defineConfig({
     fs: {
       strict: true,
     },
-    // https: {
-    //   key: fs.readFileSync('./certs/localhost.key'),
-    //   cert: fs.readFileSync('./certs/localhost.crt'),
-    // },
-    // proxy: {
-    //   '/meta/': {
-    //       target: 'https://172.1.1.0:5500/_webaverse',
-    //       changeOrigin: true,
-    //       secure: false,
-    //       rewrite: (path) => path.replace(/^\/meta\//, ''),
-    //   },
-    // },
-    // hmr: {
-    //   server: 'https://localhost',
-    // },
   },
 })
